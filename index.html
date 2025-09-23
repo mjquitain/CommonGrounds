@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CommonGrounds - Student Task and Study Management App">
+    <title>CommonGrounds - Your Personal Study Buddy</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main class="login-container">
+        <!-- Left Section: Branding and Description -->
+        <section class="branding-section">
+            <header class="brand-header">
+                <h1 class="brand-name">CommonGrounds</h1>
+                <p class="brand-description">
+                    Welcome to CommonGrounds, your personal study buddy. 
+                    Organize your tasks, plan your studies, and stay on track.
+                </p>
+            </header>
+        </section>
+
+        <!-- Right Section: Login Form -->
+        <section class="login-section">
+            <header class="login-header">
+                <h2 class="welcome-title">Welcome Back!</h2>
+                <p class="login-subtitle">Focus. Plan. Achieve.</p>
+            </header>
+
+            <form class="login-form" id="loginForm" action="#" method="POST">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <a href="dashboard.html" class="login-button">
+                    Log In
+                </a>
+
+                <div class="form-footer">
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                    <p class="signup-link">
+                        Don't have an account? 
+                        <a href="#" class="signup-text">Sign up here</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

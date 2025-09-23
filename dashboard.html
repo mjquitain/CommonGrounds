@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CommonGrounds Dashboard - Student Task and Study Management">
+    <title>Dashboard - CommonGrounds</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#learning-hub" class="nav-link">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">Learning Hub</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#calendar" class="nav-link">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#focus-mode" class="nav-link">
+                            <span class="nav-icon">🎯</span>
+                            <span class="nav-text">Focus Mode</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="header-brand">CommonGrounds</h1>
+                    <p class="header-tagline">Focus. Plan. Achieve.</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="user-welcome">
+                        <span class="welcome-text">Welcome, </span>
+                        <span class="user-name">John Doe</span>
+                    </div>
+                    
+                    <button class="notification-btn" aria-label="Notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <div class="user-profile">
+                        <button class="profile-btn" aria-label="User Profile">
+                            <span class="profile-icon">👤</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="dashboard-main">
+                <section class="dashboard-content">
+                    <header class="content-header">
+                        <h2 class="content-title">Dashboard</h2>
+                        <p class="content-subtitle">Welcome back! Here's what's happening with your studies today.</p>
+                    </header>
+
+                    <!-- Dashboard Overview Cards -->
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card">
+                            <header class="card-header">
+                                <h3 class="card-title">Today's Tasks</h3>
+                                <span class="card-icon">✅</span>
+                            </header>
+                            <div class="card-content">
+                                <p class="card-number">5</p>
+                                <p class="card-description">Tasks remaining</p>
+                            </div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="card-header">
+                                <h3 class="card-title">Study Time</h3>
+                                <span class="card-icon">⏰</span>
+                            </header>
+                            <div class="card-content">
+                                <p class="card-number">2.5</p>
+                                <p class="card-description">Hours today</p>
+                            </div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="card-header">
+                                <h3 class="card-title">Weekly Progress</h3>
+                                <span class="card-icon">📈</span>
+                            </header>
+                            <div class="card-content">
+                                <p class="card-number">78%</p>
+                                <p class="card-description">Goals completed</p>
+                            </div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="card-header">
+                                <h3 class="card-title">Upcoming</h3>
+                                <span class="card-icon">📋</span>
+                            </header>
+                            <div class="card-content">
+                                <p class="card-number">3</p>
+                                <p class="card-description">Assignments due</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Recent Activity Section -->
+                    <section class="recent-activity">
+                        <header class="section-header">
+                            <h3 class="section-title">Recent Activity</h3>
+                            <a href="#" class="section-link">View All</a>
+                        </header>
+                        
+                        <div class="activity-list">
+                            <article class="activity-item">
+                                <div class="activity-icon">📝</div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Completed Math Assignment</h4>
+                                    <p class="activity-time">2 hours ago</p>
+                                </div>
+                            </article>
+                            
+                            <article class="activity-item">
+                                <div class="activity-icon">📚</div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Started Physics Chapter 5</h4>
+                                    <p class="activity-time">4 hours ago</p>
+                                </div>
+                            </article>
+                            
+                            <article class="activity-item">
+                                <div class="activity-icon">🎯</div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Completed Focus Session</h4>
+                                    <p class="activity-time">Yesterday</p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
