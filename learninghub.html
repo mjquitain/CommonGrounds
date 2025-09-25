@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CommonGrounds Learning Hub - Student Task and Study Management">
+    <title>Learning Hub - CommonGrounds</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        #modules-tab:target ~ * #tasks-tab,
+        body:has(#modules-tab:target) #tasks-tab {
+            display: none !important;
+        }
+        
+        #modules-tab:target {
+            display: block !important;
+        }
+        
+        :root {
+            --show-tasks: block;
+            --show-modules: none;
+        }
+        
+        :root:has(#modules-tab:target) {
+            --show-tasks: none;
+            --show-modules: block;
+        }
+        
+        #tasks-tab {
+            display: var(--show-tasks) !important;
+        }
+        
+        #modules-tab {
+            display: var(--show-modules) !important;
+        }
+        
+        #modules-tab:target,
+        #tasks-tab:target {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="learninghub.html" class="nav-link active">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">Learning Hub</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="calendar.html" class="nav-link">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="focusmode.html" class="nav-link">
+                            <span class="nav-icon">🎯</span>
+                            <span class="nav-text">Focus Mode</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon"></span>
+                            <span class="nav-text">Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="header-brand">CommonGrounds</h1>
+                    <p class="header-tagline">Focus. Plan. Achieve.</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="user-welcome">
+                        <span class="welcome-text">Welcome, </span>
+                        <span class="user-name">John Doe</span>
+                    </div>
+                    
+                    <button class="notification-btn" aria-label="Notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <div class="user-profile">
+                        <button class="profile-btn" aria-label="User Profile">
+                            <span class="profile-icon">👤</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Learning Hub Content -->
+            <main class="dashboard-main">
+                <section class="learning-hub-content">
+                    <header class="content-header">
+                        <h2 class="content-title">Learning Hub</h2>
+                        <p class="content-subtitle">Manage your tasks and study modules in one place.</p>
+                    </header>
+
+                    <!-- Tab Navigation -->
+                    <nav class="tab-navigation">
+                        <a href="#tasks-tab" class="tab-btn">
+                            <span class="tab-icon">📋</span>
+                            <span class="tab-text">Tasks</span>
+                            <span class="tab-count">8</span>
+                        </a>
+                        <a href="#modules-tab" class="tab-btn">
+                            <span class="tab-icon">📖</span>
+                            <span class="tab-text">Modules</span>
+                            <span class="tab-count">12</span>
+                        </a>
+                    </nav>
+
+                    <!-- Tab Container -->
+                    <div class="tabs-container">
+                        <!-- Tasks Tab Content -->
+                        <div class="tab-content" id="tasks-tab">
+                        <div class="tasks-container">
+                            <!-- Tasks Filter and Actions -->
+                            <div class="tasks-header">
+                                <div class="tasks-filters">
+                                    <select class="filter-dropdown" id="course-filter">
+                                        <option value="all">All Courses</option>
+                                        <option value="math-201">MATH 201</option>
+                                        <option value="phys-101">PHYS 101</option>
+                                        <option value="hist-150">HIST 150</option>
+                                        <option value="chem-120">CHEM 120</option>
+                                    </select>
+                                    <select class="filter-dropdown" id="status-filter">
+                                        <option value="all">All Status</option>
+                                        <option value="not-started">Not Started</option>
+                                        <option value="in-progress">In Progress</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="overdue">Overdue</option>
+                                    </select>
+                                    <select class="filter-dropdown" id="priority-filter">
+                                        <option value="all">All Priorities</option>
+                                        <option value="high">High Priority</option>
+                                        <option value="medium">Medium Priority</option>
+                                        <option value="low">Low Priority</option>
+                                    </select>
+                                </div>
+                                <button class="add-task-btn">
+                                    <span class="btn-icon">➕</span>
+                                    Add Task
+                                </button>
+                            </div>
+
+                            <!-- Tasks List -->
+                            <div class="tasks-grid">
+                                <article class="task-card high-priority">
+                                    <div class="task-card-header">
+                                        <div class="task-priority-badge high">High Priority</div>
+                                        <div class="task-actions">
+                                            <button class="task-action-btn" title="Edit">✏️</button>
+                                            <button class="task-action-btn" title="Delete">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-content">
+                                        <h3 class="task-card-title">Math Assignment - Calculus Problem Set</h3>
+                                        <p class="task-card-course">MATH 201 - Calculus II</p>
+                                        <p class="task-card-description">Complete problems 1-25 from Chapter 7. Focus on integration by parts and substitution methods.</p>
+                                        <div class="task-card-meta">
+                                            <span class="task-deadline urgent">Due: Tomorrow, 11:59 PM</span>
+                                            <span class="task-status not-started">Not Started</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-footer">
+                                        <div class="task-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span class="progress-text">0% Complete</span>
+                                        </div>
+                                        <button class="start-task-btn">Start Task</button>
+                                    </div>
+                                </article>
+
+                                <article class="task-card medium-priority">
+                                    <div class="task-card-header">
+                                        <div class="task-priority-badge medium">Medium Priority</div>
+                                        <div class="task-actions">
+                                            <button class="task-action-btn" title="Edit">✏️</button>
+                                            <button class="task-action-btn" title="Delete">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-content">
+                                        <h3 class="task-card-title">Physics Lab Report</h3>
+                                        <p class="task-card-course">PHYS 101 - General Physics</p>
+                                        <p class="task-card-description">Write lab report on electromagnetic field experiments. Include data analysis and conclusions.</p>
+                                        <div class="task-card-meta">
+                                            <span class="task-deadline">Due: Oct 2, 2025</span>
+                                            <span class="task-status in-progress">In Progress</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-footer">
+                                        <div class="task-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 45%"></div>
+                                            </div>
+                                            <span class="progress-text">45% Complete</span>
+                                        </div>
+                                        <button class="continue-task-btn">Continue</button>
+                                    </div>
+                                </article>
+
+                                <article class="task-card low-priority">
+                                    <div class="task-card-header">
+                                        <div class="task-priority-badge low">Low Priority</div>
+                                        <div class="task-actions">
+                                            <button class="task-action-btn" title="Edit">✏️</button>
+                                            <button class="task-action-btn" title="Delete">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-content">
+                                        <h3 class="task-card-title">History Essay Draft</h3>
+                                        <p class="task-card-course">HIST 150 - Modern History</p>
+                                        <p class="task-card-description">Write first draft of essay on Industrial Revolution impacts on society.</p>
+                                        <div class="task-card-meta">
+                                            <span class="task-deadline">Due: Oct 8, 2025</span>
+                                            <span class="task-status planning">Planning</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-footer">
+                                        <div class="task-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 15%"></div>
+                                            </div>
+                                            <span class="progress-text">15% Complete</span>
+                                        </div>
+                                        <button class="start-task-btn">Start Task</button>
+                                    </div>
+                                </article>
+
+                                <article class="task-card medium-priority">
+                                    <div class="task-card-header">
+                                        <div class="task-priority-badge medium">Medium Priority</div>
+                                        <div class="task-actions">
+                                            <button class="task-action-btn" title="Edit">✏️</button>
+                                            <button class="task-action-btn" title="Delete">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-content">
+                                        <h3 class="task-card-title">Chemistry Lab Prep</h3>
+                                        <p class="task-card-course">CHEM 120 - General Chemistry</p>
+                                        <p class="task-card-description">Review safety protocols and prepare for organic synthesis lab next week.</p>
+                                        <div class="task-card-meta">
+                                            <span class="task-deadline">Due: Sep 29, 2025</span>
+                                            <span class="task-status not-started">Not Started</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-footer">
+                                        <div class="task-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span class="progress-text">0% Complete</span>
+                                        </div>
+                                        <button class="start-task-btn">Start Task</button>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modules Tab Content -->
+                    <div class="tab-content" id="modules-tab">
+                        <div class="modules-container">
+                            <div class="modules-header">
+                                <div class="modules-filters">
+                                    <select class="filter-dropdown" id="subject-filter">
+                                        <option value="all">All Subjects</option>
+                                        <option value="mathematics">Mathematics</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="history">History</option>
+                                        <option value="chemistry">Chemistry</option>
+                                    </select>
+                                    <select class="filter-dropdown" id="progress-filter">
+                                        <option value="all">All Progress</option>
+                                        <option value="not-started">Not Started</option>
+                                        <option value="in-progress">In Progress</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </div>
+                                <button class="add-module-btn">
+                                    <span class="btn-icon">📚</span>
+                                    Add Module
+                                </button>
+                            </div>
+
+                            <!-- Modules Grid -->
+                            <div class="modules-grid">
+                                <article class="module-card">
+                                    <div class="module-card-header">
+                                        <div class="module-subject-badge mathematics">Mathematics</div>
+                                        <div class="module-actions">
+                                            <button class="module-action-btn" title="Bookmark">🔖</button>
+                                            <button class="module-action-btn" title="More">⋯</button>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-content">
+                                        <div class="module-icon">
+                                            <span class="subject-icon math">∫</span>
+                                        </div>
+                                        <h3 class="module-card-title">Integration Techniques</h3>
+                                        <p class="module-card-course">Calculus II - Chapter 7</p>
+                                        <p class="module-card-description">Learn advanced integration methods including by parts, partial fractions, and trigonometric substitution.</p>
+                                        <div class="module-stats">
+                                            <span class="module-stat">
+                                                <span class="stat-icon">📄</span>
+                                                <span class="stat-text">15 Pages</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">⏱️</span>
+                                                <span class="stat-text">2h 30m</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">🎯</span>
+                                                <span class="stat-text">8 Exercises</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-footer">
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 60%"></div>
+                                            </div>
+                                            <span class="progress-text">60% Complete</span>
+                                        </div>
+                                        <button class="continue-module-btn">Continue Reading</button>
+                                    </div>
+                                </article>
+
+                                <article class="module-card">
+                                    <div class="module-card-header">
+                                        <div class="module-subject-badge physics">Physics</div>
+                                        <div class="module-actions">
+                                            <button class="module-action-btn" title="Bookmark">🔖</button>
+                                            <button class="module-action-btn" title="More">⋯</button>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-content">
+                                        <div class="module-icon">
+                                            <span class="subject-icon physics">⚡</span>
+                                        </div>
+                                        <h3 class="module-card-title">Electromagnetic Fields</h3>
+                                        <p class="module-card-course">Physics I - Chapter 12</p>
+                                        <p class="module-card-description">Explore electric and magnetic fields, electromagnetic induction, and Maxwell's equations.</p>
+                                        <div class="module-stats">
+                                            <span class="module-stat">
+                                                <span class="stat-icon">📄</span>
+                                                <span class="stat-text">22 Pages</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">⏱️</span>
+                                                <span class="stat-text">3h 15m</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">🎯</span>
+                                                <span class="stat-text">12 Exercises</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-footer">
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 25%"></div>
+                                            </div>
+                                            <span class="progress-text">25% Complete</span>
+                                        </div>
+                                        <button class="start-module-btn">Start Reading</button>
+                                    </div>
+                                </article>
+
+                                <article class="module-card">
+                                    <div class="module-card-header">
+                                        <div class="module-subject-badge history">History</div>
+                                        <div class="module-actions">
+                                            <button class="module-action-btn" title="Bookmark">🔖</button>
+                                            <button class="module-action-btn" title="More">⋯</button>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-content">
+                                        <div class="module-icon">
+                                            <span class="subject-icon history">🏛️</span>
+                                        </div>
+                                        <h3 class="module-card-title">Industrial Revolution</h3>
+                                        <p class="module-card-course">Modern History - Unit 3</p>
+                                        <p class="module-card-description">Study the causes, developments, and impacts of the Industrial Revolution on society and economy.</p>
+                                        <div class="module-stats">
+                                            <span class="module-stat">
+                                                <span class="stat-icon">📄</span>
+                                                <span class="stat-text">18 Pages</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">⏱️</span>
+                                                <span class="stat-text">2h 45m</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">🎯</span>
+                                                <span class="stat-text">6 Exercises</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-footer">
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span class="progress-text">Not Started</span>
+                                        </div>
+                                        <button class="start-module-btn">Start Reading</button>
+                                    </div>
+                                </article>
+
+                                <article class="module-card">
+                                    <div class="module-card-header">
+                                        <div class="module-subject-badge chemistry">Chemistry</div>
+                                        <div class="module-actions">
+                                            <button class="module-action-btn" title="Bookmark">🔖</button>
+                                            <button class="module-action-btn" title="More">⋯</button>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-content">
+                                        <div class="module-icon">
+                                            <span class="subject-icon chemistry">⚗️</span>
+                                        </div>
+                                        <h3 class="module-card-title">Organic Synthesis</h3>
+                                        <p class="module-card-course">Chemistry II - Chapter 9</p>
+                                        <p class="module-card-description">Learn fundamental organic synthesis reactions and mechanisms for building complex molecules.</p>
+                                        <div class="module-stats">
+                                            <span class="module-stat">
+                                                <span class="stat-icon">📄</span>
+                                                <span class="stat-text">25 Pages</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">⏱️</span>
+                                                <span class="stat-text">4h 10m</span>
+                                            </span>
+                                            <span class="module-stat">
+                                                <span class="stat-icon">🎯</span>
+                                                <span class="stat-text">15 Exercises</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="module-card-footer">
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 80%"></div>
+                                            </div>
+                                            <span class="progress-text">80% Complete</span>
+                                        </div>
+                                        <button class="continue-module-btn">Continue Reading</button>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    </div> 
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- AI Chat Button -->
+    <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+        <span class="ai-icon">🤖</span>
+        <span class="ai-text">Wasi Talks</span>
+    </a>
+
+</body>
+</html>

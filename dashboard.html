@@ -14,27 +14,33 @@
             <nav class="sidebar-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#dashboard" class="nav-link active">
+                        <a href="dashboard.html" class="nav-link">
                             <span class="nav-icon">📊</span>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#learning-hub" class="nav-link">
+                        <a href="learninghub.html" class="nav-link">
                             <span class="nav-icon">📚</span>
                             <span class="nav-text">Learning Hub</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#calendar" class="nav-link">
+                        <a href="calendar.html" class="nav-link">
                             <span class="nav-icon">📅</span>
                             <span class="nav-text">Calendar</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#focus-mode" class="nav-link">
+                        <a href="focusmode.html" class="nav-link">
                             <span class="nav-icon">🎯</span>
                             <span class="nav-text">Focus Mode</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon"></span>
+                            <span class="nav-text">Log Out</span>
                         </a>
                     </li>
                 </ul>
@@ -77,89 +83,185 @@
                         <p class="content-subtitle">Welcome back! Here's what's happening with your studies today.</p>
                     </header>
 
-                    <!-- Dashboard Overview Cards -->
-                    <div class="dashboard-grid">
-                        <article class="dashboard-card">
-                            <header class="card-header">
-                                <h3 class="card-title">Today's Tasks</h3>
-                                <span class="card-icon">✅</span>
+                    <!-- Dashboard Main Grid -->
+                    <div class="dashboard-main-grid">
+                        <!-- Upcoming Tasks Section -->
+                        <section class="tasks-section">
+                            <header class="section-header">
+                                <h3 class="section-title">
+                                    <span class="section-icon">⏰</span>
+                                    Upcoming Tasks
+                                </h3>
+                                <a href="learninghub.html#tasks-tab" class="section-link">View All</a>
                             </header>
-                            <div class="card-content">
-                                <p class="card-number">5</p>
-                                <p class="card-description">Tasks remaining</p>
+                            
+                            <div class="tasks-list">
+                                <article class="task-item urgent">
+                                    <div class="task-priority">
+                                        <span class="priority-indicator high"></span>
+                                    </div>
+                                    <div class="task-content">
+                                        <h4 class="task-title">Math Assignment - Calculus Problem Set</h4>
+                                        <p class="task-course">MATH 201</p>
+                                        <div class="task-meta">
+                                            <span class="task-deadline">Due: Tomorrow, 11:59 PM</span>
+                                            <span class="task-status">Not Started</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <article class="task-item">
+                                    <div class="task-priority">
+                                        <span class="priority-indicator medium"></span>
+                                    </div>
+                                    <div class="task-content">
+                                        <h4 class="task-title">Physics Lab Report</h4>
+                                        <p class="task-course">PHYS 101</p>
+                                        <div class="task-meta">
+                                            <span class="task-deadline">Due: Oct 2, 2025</span>
+                                            <span class="task-status">In Progress</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <article class="task-item">
+                                    <div class="task-priority">
+                                        <span class="priority-indicator low"></span>
+                                    </div>
+                                    <div class="task-content">
+                                        <h4 class="task-title">History Essay Draft</h4>
+                                        <p class="task-course">HIST 150</p>
+                                        <div class="task-meta">
+                                            <span class="task-deadline">Due: Oct 8, 2025</span>
+                                            <span class="task-status">Planning</span>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-                        </article>
+                        </section>
 
-                        <article class="dashboard-card">
-                            <header class="card-header">
-                                <h3 class="card-title">Study Time</h3>
-                                <span class="card-icon">⏰</span>
+                        <!-- Today's Classes Section -->
+                        <section class="classes-section">
+                            <header class="section-header">
+                                <h3 class="section-title">
+                                    <span class="section-icon">📅</span>
+                                    Today's Classes
+                                </h3>
+                                <span class="section-date">Wed, Sep 25</span>
                             </header>
-                            <div class="card-content">
-                                <p class="card-number">2.5</p>
-                                <p class="card-description">Hours today</p>
+                            
+                            <div class="classes-list">
+                                <article class="class-item current">
+                                    <div class="class-time">
+                                        <span class="time-start">9:00 AM</span>
+                                        <span class="time-end">10:30 AM</span>
+                                    </div>
+                                    <div class="class-content">
+                                        <h4 class="class-title">Calculus II</h4>
+                                        <p class="class-code">MATH 201</p>
+                                        <p class="class-location">Room 142, Science Building</p>
+                                        <span class="class-status">In Progress</span>
+                                    </div>
+                                </article>
+                                
+                                <article class="class-item upcoming">
+                                    <div class="class-time">
+                                        <span class="time-start">11:00 AM</span>
+                                        <span class="time-end">12:15 PM</span>
+                                    </div>
+                                    <div class="class-content">
+                                        <h4 class="class-title">Physics Lab</h4>
+                                        <p class="class-code">PHYS 101L</p>
+                                        <p class="class-location">Lab 3, Physics Building</p>
+                                        <span class="class-status">Next</span>
+                                    </div>
+                                </article>
+                                
+                                <article class="class-item">
+                                    <div class="class-time">
+                                        <span class="time-start">2:00 PM</span>
+                                        <span class="time-end">3:30 PM</span>
+                                    </div>
+                                    <div class="class-content">
+                                        <h4 class="class-title">Modern History</h4>
+                                        <p class="class-code">HIST 150</p>
+                                        <p class="class-location">Room 201, Humanities</p>
+                                        <span class="class-status">Later</span>
+                                    </div>
+                                </article>
                             </div>
-                        </article>
+                        </section>
 
-                        <article class="dashboard-card">
-                            <header class="card-header">
-                                <h3 class="card-title">Weekly Progress</h3>
-                                <span class="card-icon">📈</span>
+                        <!-- Modules to Read Section -->
+                        <section class="modules-section">
+                            <header class="section-header">
+                                <h3 class="section-title">
+                                    <span class="section-icon">📚</span>
+                                    Modules to Read
+                                </h3>
+                                <a href="learninghub.html#modules-tab" class="section-link">Library</a>
                             </header>
-                            <div class="card-content">
-                                <p class="card-number">78%</p>
-                                <p class="card-description">Goals completed</p>
+                            
+                            <div class="modules-list">
+                                <article class="module-item">
+                                    <div class="module-icon">
+                                        <span class="subject-icon math">∫</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <h4 class="module-title">Integration Techniques</h4>
+                                        <p class="module-course">Calculus II - Chapter 7</p>
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 60%"></div>
+                                            </div>
+                                            <span class="progress-text">60% Complete</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <article class="module-item">
+                                    <div class="module-icon">
+                                        <span class="subject-icon physics">⚡</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <h4 class="module-title">Electromagnetic Fields</h4>
+                                        <p class="module-course">Physics I - Chapter 12</p>
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 25%"></div>
+                                            </div>
+                                            <span class="progress-text">25% Complete</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <article class="module-item">
+                                    <div class="module-icon">
+                                        <span class="subject-icon history">�️</span>
+                                    </div>
+                                    <div class="module-content">
+                                        <h4 class="module-title">Industrial Revolution</h4>
+                                        <p class="module-course">Modern History - Unit 3</p>
+                                        <div class="module-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span class="progress-text">Not Started</span>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-                        </article>
-
-                        <article class="dashboard-card">
-                            <header class="card-header">
-                                <h3 class="card-title">Upcoming</h3>
-                                <span class="card-icon">📋</span>
-                            </header>
-                            <div class="card-content">
-                                <p class="card-number">3</p>
-                                <p class="card-description">Assignments due</p>
-                            </div>
-                        </article>
+                        </section>
                     </div>
-
-                    <!-- Recent Activity Section -->
-                    <section class="recent-activity">
-                        <header class="section-header">
-                            <h3 class="section-title">Recent Activity</h3>
-                            <a href="#" class="section-link">View All</a>
-                        </header>
-                        
-                        <div class="activity-list">
-                            <article class="activity-item">
-                                <div class="activity-icon">📝</div>
-                                <div class="activity-content">
-                                    <h4 class="activity-title">Completed Math Assignment</h4>
-                                    <p class="activity-time">2 hours ago</p>
-                                </div>
-                            </article>
-                            
-                            <article class="activity-item">
-                                <div class="activity-icon">📚</div>
-                                <div class="activity-content">
-                                    <h4 class="activity-title">Started Physics Chapter 5</h4>
-                                    <p class="activity-time">4 hours ago</p>
-                                </div>
-                            </article>
-                            
-                            <article class="activity-item">
-                                <div class="activity-icon">🎯</div>
-                                <div class="activity-content">
-                                    <h4 class="activity-title">Completed Focus Session</h4>
-                                    <p class="activity-time">Yesterday</p>
-                                </div>
-                            </article>
-                        </div>
-                    </section>
                 </section>
             </main>
         </div>
     </div>
+
+    <!-- AI Chat Button -->
+    <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+        <span class="ai-icon">🤖</span>
+        <span class="ai-text">Wasi Talks</span>
+    </a>
 </body>
 </html>
