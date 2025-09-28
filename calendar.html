@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CommonGrounds Learning Hub - Student Task and Study Management">
+    <meta name="description" content="CommonGrounds Calendar - Schedule and Task Management">
     <title>Calendar - CommonGrounds</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <div class="learninghub-layout">
+    <div class="dashboard-layout">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <nav class="sidebar-nav">
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="calendar.html" class="nav-link">
+                        <a href="calendar.html" class="nav-link active">
                             <span class="nav-icon">📅</span>
                             <span class="nav-text">Calendar</span>
                         </a>
@@ -74,7 +74,346 @@
                     </div>
                 </div>
             </header>
+
+            <!-- Calendar Content -->
+            <main class="dashboard-main">
+                <section class="calendar-content">
+                    <header class="content-header">
+                        <h2 class="content-title">Academic Calendar</h2>
+                        <p class="content-subtitle">Track your tasks, classes, and important deadlines.</p>
+                    </header>
+
+                    <!-- Calendar Controls -->
+                    <div class="calendar-controls">
+                        <div class="calendar-navigation">
+                            <button class="nav-btn prev-btn" aria-label="Previous Month">
+                                <span class="nav-icon">‹</span>
+                            </button>
+                            <h3 class="current-month" id="current-month">September 2025</h3>
+                            <button class="nav-btn next-btn" aria-label="Next Month">
+                                <span class="nav-icon">›</span>
+                            </button>
+                        </div>
+                        
+                        <div class="view-controls">
+                            <a href="#month-view" class="view-btn active">
+                                <span class="view-icon">📅</span>
+                                <span class="view-text">Month</span>
+                            </a>
+                            <a href="#week-view" class="view-btn">
+                                <span class="view-icon">📊</span>
+                                <span class="view-text">Week</span>
+                            </a>
+                        </div>
+                        
+                        <button class="today-btn">
+                            <span class="today-icon">📍</span>
+                            Today
+                        </button>
+                    </div>
+
+                    <!-- Calendar Legend -->
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot has-tasks"></span>
+                            <span class="legend-text">Has Tasks</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot has-classes"></span>
+                            <span class="legend-text">Class Days</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot has-both"></span>
+                            <span class="legend-text">Tasks & Classes</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot today"></span>
+                            <span class="legend-text">Today</span>
+                        </div>
+                    </div>
+
+                    <!-- Month View -->
+                    <div class="calendar-view" id="month-view">
+                        <div class="calendar-container">
+                            <div class="calendar-grid">
+                                <!-- Day Headers -->
+                                <div class="day-header">Sun</div>
+                                <div class="day-header">Mon</div>
+                                <div class="day-header">Tue</div>
+                                <div class="day-header">Wed</div>
+                                <div class="day-header">Thu</div>
+                                <div class="day-header">Fri</div>
+                                <div class="day-header">Sat</div>
+
+                                <!-- Calendar Days -->
+                                <!-- Week 1: Aug 31 (Sun) - Sep 6 (Sat) -->
+                                <div class="calendar-day prev-month">31</div>
+                                <div class="calendar-day current-month">1</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">2</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">MATH 201</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">3</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">4</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">PHYS 101</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">5</div>
+                                <div class="calendar-day current-month">6</div>
+
+                                <!-- Week 2: Sep 7 (Sun) - Sep 13 (Sat) -->
+                                <div class="calendar-day current-month">7</div>
+                                <div class="calendar-day current-month">8</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">9</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">MATH 201</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">10</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">11</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">PHYS 101</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">12</div>
+                                <div class="calendar-day current-month">13</div>
+
+                                <!-- Week 3: Sep 14 (Sun) - Sep 20 (Sat) -->
+                                <div class="calendar-day current-month">14</div>
+                                <div class="calendar-day current-month">15</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">16</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">MATH 201</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">17</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">18</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">PHYS 101</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">19</div>
+                                <div class="calendar-day current-month">20</div>
+
+                                <!-- Week 4: Sep 21 (Sun) - Sep 27 (Sat) -->
+                                <div class="calendar-day current-month">21</div>
+                                <div class="calendar-day current-month">22</div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">23</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">MATH 201</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">24</div>
+                                <div class="calendar-day current-month has-both">
+                                    <span class="day-number">25</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">PHYS 101</span>
+                                        <span class="task-indicator">Assignment Due</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month has-tasks">
+                                    <span class="day-number">26</span>
+                                    <div class="day-indicators">
+                                        <span class="task-indicator">Lab Report</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month">27</div>
+
+                                <!-- Week 5: Sep 28 (Sun) - Oct 4 (Sat) -->
+                                <div class="calendar-day current-month today">
+                                    <span class="day-number">28</span>
+                                    <div class="today-indicator">Today</div>
+                                </div>
+                                <div class="calendar-day current-month has-tasks">
+                                    <span class="day-number">29</span>
+                                    <div class="day-indicators">
+                                        <span class="task-indicator">Chemistry Lab</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day current-month has-classes">
+                                    <span class="day-number">30</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">MATH 201</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day next-month">1</div>
+                                <div class="calendar-day next-month has-both">
+                                    <span class="day-number">2</span>
+                                    <div class="day-indicators">
+                                        <span class="class-indicator">PHYS 101</span>
+                                        <span class="task-indicator">Essay Due</span>
+                                    </div>
+                                </div>
+                                <div class="calendar-day next-month">3</div>
+                                <div class="calendar-day next-month">4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week View -->
+                    <div class="calendar-view" id="week-view" style="display: none;">
+                        <div class="week-container">
+                            <div class="week-header">
+                                <div class="time-column">Time</div>
+                                <div class="day-column">
+                                    <div class="day-name">Sun</div>
+                                    <div class="day-date">22</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Mon</div>
+                                    <div class="day-date">23</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Tue</div>
+                                    <div class="day-date">24</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Wed</div>
+                                    <div class="day-date">25</div>
+                                </div>
+                                <div class="day-column today-column">
+                                    <div class="day-name">Thu</div>
+                                    <div class="day-date">26</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Fri</div>
+                                    <div class="day-date">27</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Sat</div>
+                                    <div class="day-date">28</div>
+                                </div>
+                            </div>
+
+                            <div class="week-grid">
+                                <!-- Time slots -->
+                                <div class="time-slot">8:00 AM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">MATH 201</div>
+                                        <div class="event-time">8:00-9:30 AM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">PHYS 101</div>
+                                        <div class="event-time">8:00-9:30 AM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">10:00 AM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event task-event">
+                                        <div class="event-title">Lab Report Due</div>
+                                        <div class="event-time">Due 11:59 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">12:00 PM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">2:00 PM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">HIST 150</div>
+                                        <div class="event-time">2:00-3:30 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">CHEM 120</div>
+                                        <div class="event-time">2:00-4:00 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">4:00 PM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event task-event">
+                                        <div class="event-title">Chemistry Prep</div>
+                                        <div class="event-time">Study Session</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Details Panel -->
+                    <div class="task-details-panel" id="task-details-panel" style="display: none;">
+                        <div class="panel-header">
+                            <h3 class="panel-title">Tasks for Selected Day</h3>
+                            <button class="close-panel-btn" aria-label="Close Panel">×</button>
+                        </div>
+                        <div class="panel-content">
+                            <div class="task-list">
+                                <div class="task-item urgent">
+                                    <div class="task-priority">
+                                        <span class="priority-indicator high"></span>
+                                    </div>
+                                    <div class="task-content">
+                                        <h4 class="task-title">Math Assignment - Calculus Problem Set</h4>
+                                        <p class="task-course">MATH 201 - Due 11:59 PM</p>
+                                        <p class="task-description">Complete problems 1-25 from Chapter 7</p>
+                                    </div>
+                                </div>
+                                <div class="task-item normal">
+                                    <div class="task-priority">
+                                        <span class="priority-indicator medium"></span>
+                                    </div>
+                                    <div class="task-content">
+                                        <h4 class="task-title">Physics Lab Report</h4>
+                                        <p class="task-course">PHYS 101 - Due 11:59 PM</p>
+                                        <p class="task-description">Write lab report on electromagnetic field experiments</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
         </div>
     </div>
+
+    <!-- AI Chat Button -->
+    <button class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+        <span class="ai-icon">🤖</span>
+        <span class="ai-text">AI Assistant</span>
+    </button>
 </body>
 </html>
