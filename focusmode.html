@@ -3,55 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CommonGrounds Learning Hub - Student Task and Study Management">
+    <meta name="description" content="CommonGrounds Focus Mode - Student Task and Study Management">
     <title>Focus Mode - CommonGrounds</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <div id="app">
-        <!-- Sidebar Navigation -->
+    <div class="dashboard-layout">
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h2>CommonGrounds</h2>
+                <h3 class="header-tagline">Focus. Plan. Achieve.</h3>
             </div>
             <nav class="sidebar-nav">
-                <ul>
+                <ul class="nav-list">
                     <li><a href="dashboard.html">📊 Dashboard</a></li>
-                    <li><a href="learninghub.html#tasks">📝 Tasks</a></li>
-                    <li><a href="learninghub.html#modules">📚 Modules</a></li>
+                    <li><a href="learninghub.html">📚 Learning Hub</a></li>
                     <li><a href="calendar.html">📅 Calendar</a></li>
-                    <li><a href="focusmode.html" class="active">🎯 Focus Mode</a></li>
+                    <li><a href="focusmode.html">🎯 Focus Mode</a></li>
+                    <li><a href="index.html">Log Out</a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
+        <div class="main-content">
+            <header class="dashboard-header">
                 <div class="header-left">
-                    <button class="menu-toggle">☰</button>
-                    <h1>🎯 Focus Mode</h1>
+                    <h1 class="header-brand">Focus Mode</h1>
                 </div>
                 <div class="header-right">
                     <span class="user-name">Welcome, Student!</span>
-                    <div class="user-avatar">S</div>
+                    <button class="notification-btn">🔔</button>
+                    <div class="user-profile">
+                        <button class="profile-btn">
+                            <span class="profile-icon">👤</span>
+                        </button>
+                    </div>
                 </div>
             </header>
 
-            <!-- Focus Mode Content -->
-            <section class="focus-content">
-                <!-- Timer View -->
+            <main class="focus-content">
                 <div class="focus-view" id="focus-timer">
                     <div class="timer-container">
-                        <!-- Timer Header -->
                         <div class="timer-header">
                             <button class="timer-nav-btn" data-mode="focus">Focus</button>
                             <button class="timer-nav-btn" data-mode="short-break">Short Break</button>
                             <button class="timer-nav-btn" data-mode="long-break">Long Break</button>
                         </div>
 
-                        <!-- Timer Display -->
                         <div class="timer-display">
                             <div class="timer-circle">
                                 <div class="timer-text">
@@ -61,14 +59,12 @@
                             </div>
                         </div>
 
-                        <!-- Timer Controls -->
                         <div class="timer-controls">
                             <button class="btn btn-primary" id="start-pause-btn">Start</button>
                             <button class="btn btn-secondary" id="reset-btn">Reset</button>
                             <button class="btn btn-tertiary" id="skip-btn">Skip</button>
                         </div>
 
-                        <!-- Session Info -->
                         <div class="session-info">
                             <div class="session-count">
                                 <span>Session: <span id="session-number">1</span></span>
@@ -78,14 +74,12 @@
                             </div>
                         </div>
 
-                        <!-- Back Button -->
                         <div class="timer-back">
                             <a href="#focus-default" class="btn btn-outline">← Back to Settings</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- History View -->
                 <div class="focus-view" id="focus-history">
                     <div class="history-container">
                         <div class="history-header">
@@ -93,7 +87,6 @@
                             <a href="#focus-default" class="btn btn-outline">← Back</a>
                         </div>
 
-                        <!-- History Stats -->
                         <div class="history-stats">
                             <div class="stat-card">
                                 <div class="stat-number">12</div>
@@ -109,7 +102,6 @@
                             </div>
                         </div>
 
-                        <!-- Recent Sessions -->
                         <div class="recent-sessions">
                             <h3>Recent Sessions</h3>
                             <div class="session-list">
@@ -148,10 +140,8 @@
                     </div>
                 </div>
 
-                <!-- Default View -->
                 <div class="focus-view" id="focus-default">
                     <div class="focus-main">
-                        <!-- Current Time and Date -->
                         <div class="datetime-display">
                             <div class="current-time">
                                 <span id="current-time">2:30 PM</span>
@@ -161,7 +151,6 @@
                             </div>
                         </div>
 
-                        <!-- Timer Settings -->
                         <div class="timer-settings">
                             <h2>Set Your Focus Timer</h2>
                             <div class="timer-options">
@@ -189,15 +178,21 @@
                             </div>
                         </div>
 
-                        <!-- Action Buttons -->
                         <div class="focus-actions">
                             <a href="#focus-history" class="btn btn-secondary">📊 View History</a>
                             <a href="#focus-timer" class="btn btn-primary">▶️ Start Focus</a>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </main>
+        </div>
+    </div>
+
+    <div>
+        <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+            <span class="ai-icon">🤖</span>
+            <span class="ai-text">Wasi Talks</span>
+        </a>
     </div>
 </body>
 </html>

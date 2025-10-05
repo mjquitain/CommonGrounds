@@ -44,73 +44,38 @@
 
 <body>
     <div class="dashboard-layout">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>CommonGrounds</h2>
+                <h3 class="header-tagline">Focus. Plan. Achieve.</h3>
+            </div>
             <nav class="sidebar-nav">
                 <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="dashboard.html" class="nav-link">
-                            <span class="nav-icon">📊</span>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="learninghub.html" class="nav-link active">
-                            <span class="nav-icon">📚</span>
-                            <span class="nav-text">Learning Hub</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="calendar.html" class="nav-link">
-                            <span class="nav-icon">📅</span>
-                            <span class="nav-text">Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="focusmode.html" class="nav-link">
-                            <span class="nav-icon">🎯</span>
-                            <span class="nav-text">Focus Mode</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">
-                            <span class="nav-icon"></span>
-                            <span class="nav-text">Log Out</span>
-                        </a>
-                    </li>
+                    <li><a href="dashboard.html">📊 Dashboard</a></li>
+                    <li><a href="learninghub.html">📚 Learning Hub</a></li>
+                    <li><a href="calendar.html">📅 Calendar</a></li>
+                    <li><a href="focusmode.html">🎯 Focus Mode</a></li>
+                    <li><a href="index.html">Log Out</a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
         <div class="main-content">
-            <!-- Header -->
             <header class="dashboard-header">
                 <div class="header-left">
-                    <h1 class="header-brand">CommonGrounds</h1>
-                    <p class="header-tagline">Focus. Plan. Achieve.</p>
+                    <h1 class="header-brand">Learning Hub</h1>
                 </div>
-
                 <div class="header-right">
-                    <div class="user-welcome">
-                        <span class="welcome-text">Welcome, </span>
-                        <span class="user-name">John Doe</span>
-                    </div>
-
-                    <button class="notification-btn" aria-label="Notifications">
-                        <span class="notification-icon">🔔</span>
-                        <span class="notification-badge">3</span>
-                    </button>
-
+                    <span class="user-name">Welcome, Student!</span>
+                    <button class="notification-btn">🔔</button>
                     <div class="user-profile">
-                        <button class="profile-btn" aria-label="User Profile">
+                        <button class="profile-btn">
                             <span class="profile-icon">👤</span>
                         </button>
                     </div>
                 </div>
             </header>
 
-            <!-- Learning Hub Content -->
             <main class="dashboard-main">
                 <section class="learning-hub-content">
                     <header class="content-header">
@@ -118,7 +83,6 @@
                         <p class="content-subtitle">Manage your tasks and study modules in one place.</p>
                     </header>
 
-                    <!-- Tab Navigation -->
                     <nav class="tab-navigation">
                         <a href="#tasks-tab" class="tab-btn">
                             <span class="tab-icon">📋</span>
@@ -132,12 +96,9 @@
                         </a>
                     </nav>
 
-                    <!-- Tab Container -->
                     <div class="tabs-container">
-                        <!-- Tasks Tab Content -->
                         <div class="tab-content" id="tasks-tab">
                             <div class="tasks-container">
-                                <!-- Tasks Filter and Actions -->
                                 <div class="tasks-header">
                                     <div class="tasks-filters">
                                         <select class="filter-dropdown" id="course-filter">
@@ -173,7 +134,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Tasks List -->
                                 <div class="tasks-grid">
                                     <article class="task-card high-priority">
                                         <div class="task-card-header">
@@ -294,7 +254,6 @@
                             </div>
                         </div>
 
-                        <!-- Modules Tab Content -->
                         <div class="tab-content" id="modules-tab">
                             <div class="modules-container">
                                 <div class="modules-header">
@@ -325,7 +284,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Modules Grid -->
                                 <div class="modules-grid">
                                     <article class="module-card">
                                         <div class="module-card-header">
@@ -504,11 +462,12 @@
         </div>
     </div>
 
-    <!-- AI Chat Button -->
-    <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
-        <span class="ai-icon">🤖</span>
-        <span class="ai-text">Wasi Talks</span>
-    </a>
+    <div>
+        <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+            <span class="ai-icon">🤖</span>
+            <span class="ai-text">Wasi Talks</span>
+        </a>
+    </div>
 
 </body>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,75 +8,41 @@
     <title>Dashboard - CommonGrounds</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <div class="dashboard-layout">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>CommonGrounds</h2>
+                <h3 class="header-tagline">Focus. Plan. Achieve.</h3>
+            </div>
             <nav class="sidebar-nav">
                 <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="dashboard.html" class="nav-link">
-                            <span class="nav-icon">📊</span>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="learninghub.html" class="nav-link">
-                            <span class="nav-icon">📚</span>
-                            <span class="nav-text">Learning Hub</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="calendar.html" class="nav-link">
-                            <span class="nav-icon">📅</span>
-                            <span class="nav-text">Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="focusmode.html" class="nav-link">
-                            <span class="nav-icon">🎯</span>
-                            <span class="nav-text">Focus Mode</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">
-                            <span class="nav-icon"></span>
-                            <span class="nav-text">Log Out</span>
-                        </a>
-                    </li>
+                    <li><a href="dashboard.html">📊 Dashboard</a></li>
+                    <li><a href="learninghub.html">📚 Learning Hub</a></li>
+                    <li><a href="calendar.html">📅 Calendar</a></li>
+                    <li><a href="focusmode.html">🎯 Focus Mode</a></li>
+                    <li><a href="index.html">Log Out</a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
         <div class="main-content">
-            <!-- Header -->
             <header class="dashboard-header">
                 <div class="header-left">
-                    <h1 class="header-brand">CommonGrounds</h1>
-                    <p class="header-tagline">Focus. Plan. Achieve.</p>
+                    <h1 class="header-brand">Dashboard</h1>
                 </div>
-                
                 <div class="header-right">
-                    <div class="user-welcome">
-                        <span class="welcome-text">Welcome, </span>
-                        <span class="user-name">John Doe</span>
-                    </div>
-                    
-                    <button class="notification-btn" aria-label="Notifications">
-                        <span class="notification-icon">🔔</span>
-                        <span class="notification-badge">3</span>
-                    </button>
-                    
+                    <span class="user-name">Welcome, Student!</span>
+                    <button class="notification-btn">🔔</button>
                     <div class="user-profile">
-                        <button class="profile-btn" aria-label="User Profile">
+                        <button class="profile-btn">
                             <span class="profile-icon">👤</span>
                         </button>
                     </div>
                 </div>
             </header>
 
-            <!-- Dashboard Content -->
             <main class="dashboard-main">
                 <section class="dashboard-content">
                     <header class="content-header">
@@ -83,9 +50,7 @@
                         <p class="content-subtitle">Welcome back! Here's what's happening with your studies today.</p>
                     </header>
 
-                    <!-- Dashboard Main Grid -->
                     <div class="dashboard-main-grid">
-                        <!-- Upcoming Tasks Section -->
                         <section class="tasks-section">
                             <header class="section-header">
                                 <h3 class="section-title">
@@ -94,7 +59,7 @@
                                 </h3>
                                 <a href="learninghub.html#tasks-tab" class="section-link">View All</a>
                             </header>
-                            
+
                             <div class="tasks-list">
                                 <article class="task-item urgent">
                                     <div class="task-priority">
@@ -109,7 +74,7 @@
                                         </div>
                                     </div>
                                 </article>
-                                
+
                                 <article class="task-item">
                                     <div class="task-priority">
                                         <span class="priority-indicator medium"></span>
@@ -123,7 +88,7 @@
                                         </div>
                                     </div>
                                 </article>
-                                
+
                                 <article class="task-item">
                                     <div class="task-priority">
                                         <span class="priority-indicator low"></span>
@@ -140,7 +105,6 @@
                             </div>
                         </section>
 
-                        <!-- Today's Classes Section -->
                         <section class="classes-section">
                             <header class="section-header">
                                 <h3 class="section-title">
@@ -149,7 +113,7 @@
                                 </h3>
                                 <span class="section-date">Wed, Sep 25</span>
                             </header>
-                            
+
                             <div class="classes-list">
                                 <article class="class-item current">
                                     <div class="class-time">
@@ -163,7 +127,7 @@
                                         <span class="class-status">In Progress</span>
                                     </div>
                                 </article>
-                                
+
                                 <article class="class-item upcoming">
                                     <div class="class-time">
                                         <span class="time-start">11:00 AM</span>
@@ -176,7 +140,7 @@
                                         <span class="class-status">Next</span>
                                     </div>
                                 </article>
-                                
+
                                 <article class="class-item">
                                     <div class="class-time">
                                         <span class="time-start">2:00 PM</span>
@@ -192,7 +156,6 @@
                             </div>
                         </section>
 
-                        <!-- Modules to Read Section -->
                         <section class="modules-section">
                             <header class="section-header">
                                 <h3 class="section-title">
@@ -201,7 +164,7 @@
                                 </h3>
                                 <a href="learninghub.html#modules-tab" class="section-link">Library</a>
                             </header>
-                            
+
                             <div class="modules-list">
                                 <article class="module-item">
                                     <div class="module-icon">
@@ -218,7 +181,7 @@
                                         </div>
                                     </div>
                                 </article>
-                                
+
                                 <article class="module-item">
                                     <div class="module-icon">
                                         <span class="subject-icon physics">⚡</span>
@@ -234,7 +197,7 @@
                                         </div>
                                     </div>
                                 </article>
-                                
+
                                 <article class="module-item">
                                     <div class="module-icon">
                                         <span class="subject-icon history">�️</span>
@@ -257,11 +220,13 @@
             </main>
         </div>
     </div>
-
-    <!-- AI Chat Button -->
-    <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
-        <span class="ai-icon">🤖</span>
-        <span class="ai-text">Wasi Talks</span>
-    </a>
+    
+    <div>
+        <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
+            <span class="ai-icon">🤖</span>
+            <span class="ai-text">Wasi Talks</span>
+        </a>
+    </div>
 </body>
+
 </html>
