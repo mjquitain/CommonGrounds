@@ -303,6 +303,11 @@ body {
     padding: 2rem;
     overflow-y: auto;
 }
+.dashboard-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
 .content-header {
     margin-bottom: 2rem;
@@ -321,7 +326,6 @@ body {
     margin: 0;
 }
 
-/* Dashboard Main Grid */
 .dashboard-main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -332,7 +336,7 @@ body {
 
 .tasks-section {
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
 }
 
 .classes-section {
@@ -341,15 +345,13 @@ body {
 }
 
 .modules-section {
-    grid-column: 2 / 3;
+    grid-column: 1 / 2;
     grid-row: 2 / 3;
 }
 
-/* Section Styles */
 .tasks-section,
 .classes-section,
 .modules-section {
-    background: white;
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -405,22 +407,16 @@ body {
 
 .task-item {
     display: flex;
-    align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
     border-radius: 8px;
     transition: background-color 0.2s, transform 0.2s;
-    border-left: 4px solid transparent;
+    border-left: 4px solid #e2e8f0;
 }
 
 .task-item:hover {
     background-color: #f7fafc;
-    transform: translateX(2px);
-}
-
-.task-item.urgent {
-    border-left-color: #e53e3e;
-    background-color: #fed7d7;
+    transform: translateY(-2px);
 }
 
 .task-priority {
@@ -429,22 +425,16 @@ body {
     margin-top: 0.25rem;
 }
 
-.priority-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+.task-item.high {
+    border-left-color: #e53e3e;
 }
 
-.priority-indicator.high {
-    background-color: #e53e3e;
+.task-item.medium {
+    border-left-color: #ed8936;
 }
 
-.priority-indicator.medium {
-    background-color: #ed8936;
-}
-
-.priority-indicator.low {
-    background-color: #38a169;
+.task-item.low {
+    border-left-color: #38a169;
 }
 
 .task-content {
@@ -505,11 +495,15 @@ body {
 
 .class-item:hover {
     background-color: #f7fafc;
+    transform: translateY(-2px);
+}
+
+.class-item:hover {
+    background-color: #f7fafc;
 }
 
 .class-item.current {
     border-left-color: #667eea;
-    background-color: #edf2f7;
 }
 
 .class-item.upcoming {
@@ -520,6 +514,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-width: 70px;
     padding: 0.5rem;
     background-color: #f7fafc;
@@ -558,29 +553,26 @@ body {
 .class-location {
     font-size: 0.8rem;
     color: #718096;
-    margin: 0 0 0.5rem 0;
+}
+
+.class-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 
 .class-status {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border-radius: 12px;
+    background-color: #edf2f7;
+    color: #4a5568;
     font-weight: 500;
 }
 
-.class-item.current .class-status {
-    background-color: #667eea;
-    color: white;
-}
-
-.class-item.upcoming .class-status {
-    background-color: #ed8936;
-    color: white;
-}
-
-.class-item:not(.current):not(.upcoming) .class-status {
-    background-color: #edf2f7;
-    color: #4a5568;
+.task-status, .class-status {
+  text-transform: uppercase;
 }
 
 /* Modules Section */
@@ -849,7 +841,7 @@ body {
 
 /* Tasks Section */
 .tasks-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -1144,7 +1136,7 @@ body {
 
 /* Modules Section */
 .modules-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -1376,896 +1368,319 @@ body {
     box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
 }
 
-/* Responsive Design for Learning Hub */
-@media (max-width: 768px) {
-    .learning-hub-content {
-        padding: 1rem;
-    }
+/* ===== CALENDAR STYLES ===== */
 
-    .content-title {
-        font-size: 2rem;
-    }
-
-    .tab-navigation {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tab-btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
-
-    .tasks-header,
-    .modules-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .tasks-filters,
-    .modules-filters {
-        justify-content: center;
-    }
-
-    .tasks-grid,
-    .modules-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .task-card-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .task-card-footer {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
-
-    .module-stats {
-        gap: 1rem;
-    }
-
-    .module-card-footer {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
+.calendar-page {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-@media (max-width: 480px) {
-    .filter-dropdown {
-        width: 100%;
-        min-width: auto;
-    }
-
-    .tasks-filters,
-    .modules-filters {
-        flex-direction: column;
-    }
-
-    .module-stats {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+.calendar-page {
+    margin-bottom: 20px;
 }
 
-/* Responsive Styles for New Dashboard Content */
-@media (max-width: 991.98px) {
-    .dashboard-main-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 1.5rem;
-    }
-
-    .tasks-section {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .classes-section {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .modules-section {
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    .ai-chat-btn {
-        width: 50px;
-        height: 50px;
-        bottom: 1.5rem;
-        right: 1.5rem;
-    }
-
-    .ai-chat-btn:hover {
-        width: 120px;
-    }
-
-    .ai-icon {
-        font-size: 1.3rem;
-    }
-
-    .ai-text {
-        font-size: 0.8rem;
-    }
+.calendar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 2rem;
 }
 
-@media (max-width: 575.98px) {
-    .dashboard-main-grid {
-        gap: 1rem;
-    }
-
-    .tasks-section,
-    .classes-section,
-    .modules-section {
-        padding: 1rem;
-    }
-
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-    }
-
-    .task-item,
-    .class-item,
-    .module-item {
-        padding: 0.75rem;
-    }
-
-    .class-time {
-        min-width: 60px;
-        padding: 0.25rem;
-    }
-
-    .time-start {
-        font-size: 0.8rem;
-    }
-
-    .time-end {
-        font-size: 0.7rem;
-    }
-
-    .module-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-
-    .ai-chat-btn {
-        width: 45px;
-        height: 45px;
-        bottom: 1rem;
-        right: 1rem;
-    }
-
-    .ai-chat-btn:hover {
-        width: 100px;
-    }
-
-    .ai-icon {
-        font-size: 1.1rem;
-    }
-
-    .ai-text {
-        font-size: 0.75rem;
-    }
+.calendar-controls .calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-    }
-
-    .dashboard-header {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-
-    .header-right {
-        gap: 1rem;
-    }
-
-    .dashboard-main {
-        padding: 1rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
 }
 
-@media (max-width: 480px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
-    .nav-list {
-        display: flex;
-        overflow-x: auto;
-        gap: 0.5rem;
-        padding: 0 1rem;
-    }
-
-    .nav-item {
-        margin-bottom: 0;
-        flex-shrink: 0;
-    }
-
-    .nav-link {
-        flex-direction: column;
-        text-align: center;
-        padding: 0.75rem;
-        min-width: 80px;
-    }
-
-    .nav-icon {
-        margin-right: 0;
-        margin-bottom: 0.25rem;
-    }
-
-    .nav-text {
-        font-size: 0.8rem;
-    }
-
-    .dashboard-header {
-        padding: 1rem 0.5rem;
-    }
-
-    .header-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-    }
-
-    .header-brand {
-        font-size: 1.5rem;
-    }
-
-    .dashboard-main {
-        padding: 1rem 0.5rem;
-    }
+.nav-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-1px);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-
-/* Extra Small Devices (phones, 320px to 575px) */
-@media (max-width: 575.98px) {
-    .login-container {
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    .branding-section {
-        padding: 1.5rem 1rem;
-        min-height: 35vh;
-        order: 1;
-    }
-
-    .brand-name {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-    }
-
-    .brand-description {
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-
-    .login-section {
-        padding: 1.5rem 1rem;
-        order: 2;
-        flex: 1;
-    }
-
-    .welcome-title {
-        font-size: 1.75rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .login-subtitle {
-        font-size: 1rem;
-    }
-
-    .login-form {
-        max-width: 100%;
-    }
-
-    .form-input,
-    .login-button {
-        padding: 0.75rem 0.875rem;
-        font-size: 0.95rem;
-    }
-
-    .form-label {
-        font-size: 0.85rem;
-    }
-
-    .forgot-password,
-    .signup-link {
-        font-size: 0.85rem;
-    }
+.view-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 0.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* Small Devices (landscape phones, tablets, 576px to 767px) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .login-container {
-        flex-direction: column;
-    }
-
-    .branding-section {
-        padding: 2rem 1.5rem;
-        min-height: 40vh;
-    }
-
-    .brand-name {
-        font-size: 2.2rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .brand-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-
-    .login-section {
-        padding: 2rem 1.5rem;
-    }
-
-    .welcome-title {
-        font-size: 2rem;
-    }
-
-    .login-subtitle {
-        font-size: 1.05rem;
-    }
-
-    .login-form {
-        max-width: 420px;
-    }
+.view-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Medium Devices (tablets, 768px to 991px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .login-container {
-        flex-direction: row;
-    }
-
-    .branding-section {
-        flex: 0.6;
-        padding: 2.5rem 1.5rem;
-    }
-
-    .brand-name {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .brand-description {
-        font-size: 1.15rem;
-        line-height: 1.65;
-    }
-
-    .login-section {
-        flex: 0.4;
-        padding: 2.5rem 1.5rem;
-    }
-
-    .welcome-title {
-        font-size: 2.2rem;
-    }
-
-    .login-subtitle {
-        font-size: 1.05rem;
-    }
-
-    .login-form {
-        max-width: 380px;
-    }
+.view-btn:hover {
+    color: #667eea;
 }
 
-/* Large Devices (laptops, 992px to 1199px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .login-container {
-        flex-direction: row;
-    }
-
-    .branding-section {
-        flex: 1;
-        padding: 3rem 2rem;
-    }
-
-    .brand-name {
-        font-size: 2.8rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .brand-description {
-        font-size: 1.18rem;
-        line-height: 1.7;
-    }
-
-    .login-section {
-        flex: 1;
-        padding: 3rem 2rem;
-    }
-
-    .welcome-title {
-        font-size: 2.4rem;
-    }
-
-    .login-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .login-form {
-        max-width: 400px;
-    }
+.view-btn.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Extra Large Devices (large laptops, desktops, 1200px to 1399px) */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-    .login-container {
-        flex-direction: row;
-    }
-
-    .branding-section {
-        flex: 1;
-        padding: 3.5rem 2.5rem;
-    }
-
-    .brand-name {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .brand-description {
-        font-size: 1.2rem;
-        line-height: 1.7;
-    }
-
-    .login-section {
-        flex: 1;
-        padding: 3.5rem 2.5rem;
-    }
-
-    .welcome-title {
-        font-size: 2.5rem;
-    }
-
-    .login-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .login-form {
-        max-width: 420px;
-    }
+.current-month {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    min-width: 200px;
+    text-align: center;
 }
 
-/* Extra Extra Large Devices (large monitors, 1400px and up) */
-@media (min-width: 1400px) {
-    .login-container {
-        flex-direction: row;
-    }
-
-    .branding-section {
-        flex: 1;
-        padding: 4rem 3rem;
-    }
-
-    .brand-name {
-        font-size: 3.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .brand-description {
-        font-size: 1.3rem;
-        line-height: 1.8;
-        max-width: 500px;
-    }
-
-    .login-section {
-        flex: 1;
-        padding: 4rem 3rem;
-    }
-
-    .welcome-title {
-        font-size: 2.8rem;
-    }
-
-    .login-subtitle {
-        font-size: 1.2rem;
-    }
-
-    .login-form {
-        max-width: 450px;
-    }
-
-    .form-input,
-    .login-button {
-        padding: 1rem 1.125rem;
-        font-size: 1.05rem;
-    }
-
-    .form-label {
-        font-size: 0.95rem;
-    }
+.calendar-view {
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: none;
 }
 
-/* Landscape Orientation for Mobile Devices */
-@media (max-height: 500px) and (orientation: landscape) {
-    .login-container {
-        flex-direction: row;
-        min-height: 100vh;
-    }
-
-    .branding-section {
-        flex: 0.4;
-        padding: 1rem;
-    }
-
-    .brand-name {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .brand-description {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    .login-section {
-        flex: 0.6;
-        padding: 1rem;
-    }
-
-    .welcome-title {
-        font-size: 1.5rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .login-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .login-header {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-        margin-bottom: 1rem;
-    }
-
-    .form-input,
-    .login-button {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.9rem;
-    }
+.calendar-view#month-view {
+  display: block;
 }
 
-/* High DPI/Retina Displays */
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-
-    .brand-name,
-    .welcome-title {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+#week-view:target {
+  display: block;
 }
 
-/* Print Styles */
-@media print {
-    .login-container {
-        flex-direction: column;
-        color: black;
-        background: white;
-    }
-
-    .branding-section {
-        background: white;
-        color: black;
-        padding: 1rem;
-    }
-
-    .login-section {
-        padding: 1rem;
-    }
-
-    .login-button {
-        background: #ccc;
-        color: black;
-        border: 1px solid black;
-    }
+#week-view:target ~ #month-view {
+  display: none;
 }
 
-/* ===== DASHBOARD RESPONSIVE DESIGN ===== */
-
-/* Dashboard Mobile Styles (up to 767px) */
-@media (max-width: 767.98px) {
-    .dashboard-layout {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem 0;
-        order: 1;
-    }
-
-    .sidebar-nav {
-        padding: 0 1rem;
-    }
-
-    .nav-list {
-        display: flex;
-        overflow-x: auto;
-        gap: 0.5rem;
-        padding: 0;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE/Edge */
-    }
-
-    .nav-list::-webkit-scrollbar {
-        display: none;
-        /* Chrome/Safari */
-    }
-
-    .nav-item {
-        margin-bottom: 0;
-        flex-shrink: 0;
-    }
-
-    .nav-link {
-        flex-direction: column;
-        text-align: center;
-        padding: 0.75rem;
-        min-width: 80px;
-        border-radius: 8px;
-    }
-
-    .nav-icon {
-        margin-right: 0;
-        margin-bottom: 0.25rem;
-        font-size: 1.1rem;
-    }
-
-    .nav-text {
-        font-size: 0.8rem;
-        white-space: nowrap;
-    }
-
-    .main-content {
-        margin-left: 0;
-        order: 2;
-    }
-
-    .dashboard-header {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-        position: static;
-    }
-
-    .header-left {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-    }
-
-    .header-brand {
-        font-size: 1.5rem;
-        margin: 0;
-    }
-
-    .header-tagline {
-        font-size: 0.8rem;
-        margin: 0;
-    }
-
-    .header-right {
-        gap: 1rem;
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .user-welcome {
-        order: 1;
-    }
-
-    .notification-btn {
-        order: 2;
-    }
-
-    .user-profile {
-        order: 3;
-    }
-
-    .dashboard-main {
-        padding: 1rem;
-    }
-
-    .content-title {
-        font-size: 1.5rem;
-    }
-
-    .content-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .dashboard-card {
-        padding: 1rem;
-    }
-
-    .card-number {
-        font-size: 2rem;
-    }
-
-    .recent-activity {
-        padding: 1rem;
-    }
+.view-btn.active,
+.view-btn:target {
+  background-color: #ffffff;
+  font-weight: bold;
 }
 
-/* Dashboard Tablet Styles (768px to 991px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-    }
-
-    .nav-icon {
-        font-size: 1.1rem;
-    }
-
-    .nav-text {
-        font-size: 0.9rem;
-    }
-
-    .dashboard-header {
-        padding: 1.25rem 1.5rem;
-    }
-
-    .header-brand {
-        font-size: 1.6rem;
-    }
-
-    .dashboard-main {
-        padding: 1.5rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.25rem;
-    }
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
 }
 
-/* Dashboard Desktop Styles (992px and up) */
-@media (min-width: 992px) {
-    .sidebar {
-        width: 250px;
-    }
-
-    .main-content {
-        margin-left: 250px;
-    }
-
-    .dashboard-header {
-        padding: 1.5rem 2rem;
-    }
-
-    .dashboard-main {
-        padding: 2rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
+.day-header {
+    font-weight: bold;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 0;
+    background-color: #667eea;
+    color: white;
+    border-radius: 5px;
 }
 
-/* Dashboard Large Desktop Styles (1200px and up) */
-@media (min-width: 1200px) {
-    .sidebar {
-        width: 280px;
-    }
+.day {
+    padding: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    background-color: #fff;
+    transition: background 0.2s ease;
+}
+.day:hover {
+  background-color: #f7f9ff;
+}
 
-    .main-content {
-        margin-left: 280px;
-    }
+.date {
+  font-weight: 500;
+}
 
-    .nav-link {
-        padding: 1.125rem 1.75rem;
-    }
+.indicators {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
 
-    .nav-icon {
-        font-size: 1.3rem;
-    }
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
 
-    .nav-text {
-        font-size: 1.05rem;
-    }
+.task-dot {
+  background-color: #f7b267; 
+}
 
-    .dashboard-header {
-        padding: 2rem 2.5rem;
-    }
+.class-dot {
+  background-color: #66b3ff; 
+}
 
-    .header-brand {
-        font-size: 2rem;
-    }
+.dot:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
 
-    .header-tagline {
-        font-size: 1rem;
-    }
+.has-task,
+.has-class {
+  background-color: #fcfcff;
+}
 
-    .dashboard-main {
-        padding: 2.5rem;
-    }
+.day.empty {
+    background-color: #fafafa;
+    border: none;
+}
 
-    .content-title {
-        font-size: 2.25rem;
-    }
+.today-indicator {
+    background: #b6c3ff;
+}
 
-    .content-subtitle {
-        font-size: 1.1rem;
-    }
+.week-header {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 6px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    padding: 10px 0;
+}
 
-    .dashboard-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-    }
+.time-column {
+    background: #667eea;
+    color: white;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .dashboard-card {
-        padding: 2rem;
-    }
+.day-column {
+    background: #667eea;
+    color: white;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-radius: 8px;
+}
 
-    .card-number {
-        font-size: 3rem;
-    }
+.day-column.today-column {
+    background: linear-gradient(135deg, #28a745 0%, #b9f8c7 100%);
+}
 
-    .recent-activity {
-        padding: 2rem;
-    }
+.day-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.day-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 6px;
+    background: #fafafa;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.time-slot {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.8rem;
+    border-right: 1px solid #e9ecef;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.day-slot {
+    background: white;
+    border: 1px solid #ddd;
+    min-height: 80px;
+    padding: 0.5rem;
+    position: relative;
+    border-radius: 8px;
+}
+
+.event {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event.class-event {
+    background: linear-gradient(135deg, #66b3ff 0%, #b1d7fc 100%);
+}
+
+.event.task-event {
+    background: linear-gradient(135deg, #f7b267 0%, #f8d4ad 100%);
+}
+
+.event-title {
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.event-time {
+    font-size: 0.7rem;
+    opacity: 0.9;
 }
 
 /* ===== FOCUS MODE STYLES ===== */
-
-/* Additional CSS variables for focus mode */
 :root {
     --primary-color: #667eea;
     --secondary-color: #764ba2;
@@ -2791,103 +2206,6 @@ body {
     background-color: var(--background-color);
 }
 
-/* Responsive Focus Mode */
-@media (max-width: 768px) {
-    .focus-content {
-        padding: 1rem;
-    }
-
-    .current-time {
-        font-size: 2.5rem;
-    }
-
-    .timer-options {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .timer-circle {
-        width: 250px;
-        height: 250px;
-    }
-
-    .timer-time {
-        font-size: 2.5rem;
-    }
-
-    .timer-controls {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .timer-controls .btn {
-        width: 100%;
-        max-width: 200px;
-    }
-
-    .session-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .session-item {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-        text-align: center;
-    }
-
-    .history-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem 0;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-}
-
-@media (max-width: 480px) {
-    .timer-header {
-        flex-direction: column;
-    }
-
-    .timer-nav-btn {
-        width: 100%;
-    }
-
-    .focus-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .focus-actions .btn {
-        width: 100%;
-        max-width: 250px;
-    }
-
-    .sidebar {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        height: 100vh;
-        width: 280px;
-        z-index: 1000;
-        transition: left 0.3s ease;
-    }
-}
-
 /* CSS-based navigation for focus mode views */
 .focus-view {
     display: none !important;
@@ -2921,4 +2239,109 @@ body {
 
 .sidebar.open {
     left: 0;
+}
+
+/* ===== WASI TALKS STYLES  ===== */
+
+.chats {
+  margin-top: 1.5rem;
+}
+
+.chat-heading {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.chats ul {
+  list-style: none;
+}
+
+.chats li {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #222;
+}
+
+.chat-area {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.chat-header p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.3;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.wasi-icon {
+  font-size: 1.6rem;
+}
+
+.bubble {
+  background: #f1f1f1;
+  border-radius: 20px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.95rem;
+  max-width: 70%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f1f1f1;
+  padding: 0.7rem 1rem;
+  border-radius: 25px;
+  margin: 1rem 2rem;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  outline: none;
+}
+
+.chat-input button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.attach-btn:hover, .send-btn:hover {
+  opacity: 0.7;
 }

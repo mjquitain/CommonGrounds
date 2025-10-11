@@ -44,7 +44,265 @@
             </header>
 
             <main class="dashboard-main">
+                <section class="calendar-page">
+                    <header class="content-header">
+                        <h2 class="content-title">Academic Calendar</h2>
+                        <p class="content-subtitle">Track your tasks, classes, and important deadlines</p>
+                    </header>
 
+                    <div class="calendar-toolbar">
+                        <div class="calendar-controls">
+                            <nav class="calendar-navigation">
+                                <button>
+                                    <span class="nav-btn prev-btn" aria-label="Previous Month">‹</span>
+                                </button>
+                                <h3 class="current-month">September 2025</h3>
+                                <button>
+                                    <span class="nav-btn next-btn" aria-label="Next Month">›</span>
+                                </button>
+                            </nav>
+                        </div>
+
+                        <div class="view-controls">
+                            <a href="#month-view" class="view-btn">📅 Month</a>
+                            <a href="#week-view" class="view-btn">📊 Week</a>
+                        </div>
+                    </div>
+
+                    <div class="calendar-view" id="week-view">
+                        <div class="week-container">
+                            <div class="week-header">
+                                <div class="time-column">Time</div>
+                                <div class="day-column">
+                                    <div class="day-name">Sun</div>
+                                    <div class="day-date">20</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Mon</div>
+                                    <div class="day-date">21</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Tue</div>
+                                    <div class="day-date">22</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Wed</div>
+                                    <div class="day-date">23</div>
+                                </div>
+                                <div class="day-column today-column">
+                                    <div class="day-name">Thu</div>
+                                    <div class="day-date">24</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Fri</div>
+                                    <div class="day-date">25</div>
+                                </div>
+                                <div class="day-column">
+                                    <div class="day-name">Sat</div>
+                                    <div class="day-date">26</div>
+                                </div>
+                            </div>
+
+                            <div class="week-grid">
+                                <div class="time-slot">8:30 AM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">Calculus II</div>
+                                        <div class="event-time">9:00-10:30 AM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">10:30 AM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">Physics Lab</div>
+                                        <div class="event-time">11:00-12:15 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">Physics Lab</div>
+                                        <div class="event-time">11:00-12:15 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">2:00 PM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">Modern History</div>
+                                        <div class="event-time">2:00-3:30 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">4:00 PM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event class-event">
+                                        <div class="event-title">Calculus II</div>
+                                        <div class="event-time">4:00-5:30 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+
+                                <div class="time-slot">10:00 AM</div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event task-event">
+                                        <div class="event-title">Calculus Problem Set</div>
+                                        <div class="event-time">Due 11:59 PM</div>
+                                    </div>
+                                </div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot"></div>
+                                <div class="day-slot">
+                                    <div class="event task-event">
+                                        <div class="event-title">Physics Lab Report</div>
+                                        <div class="event-time">Due: Oct 2, 2025 (In Progress)</div>
+                                    </div>
+                                    <div class="event task-event">
+                                        <div class="event-title">History Essay Draft</div>
+                                        <div class="event-time">Due: Oct 8, 2025 (Planning)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calendar-view" id="month-view">
+                        <div class="calendar">
+                            <div class="day-header">Sun</div>
+                            <div class="day-header">Mon</div>
+                            <div class="day-header">Tue</div>
+                            <div class="day-header">Wed</div>
+                            <div class="day-header">Thu</div>
+                            <div class="day-header">Fri</div>
+                            <div class="day-header">Sat</div>
+
+                            <div class="day empty">30</div>
+                            <div class="day empty">31</div>
+                            <div class="day">1</div>
+                            <div class="day">2</div>
+                            <div class="day">3</div>
+                            <div class="day">4</div>
+                            <div class="day has-task">
+                                <span class="date">5</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                </div>
+                            </div>
+                            <div class="day">6</div>
+                            <div class="day has-task has-class">
+                                <span class="date">7</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day has-class">
+                                <span class="date">8</span>
+                                <div class="indicators">
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day">9</div>
+                            <div class="day">10</div>
+                            <div class="day">11</div>
+                            <div class="day has-task">
+                                <span class="date">12</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                </div>
+                            </div>
+                            <div class="day">13</div>
+                            <div class="day has-task has-class">
+                                <span class="date">14</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day has-class">
+                                <span class="date">15</span>
+                                <div class="indicators">
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day">16</div>
+                            <div class="day">17</div>
+                            <div class="day">18</div>
+                            <div class="day has-task today-indicator">
+                                <span class="date">19</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                </div>
+                            </div>
+                            <div class="day">20</div>
+                            <div class="day has-task has-class">
+                                <span class="date">21</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day has-class">
+                                <span class="date">22</span>
+                                <div class="indicators">
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day">23</div>
+                            <div class="day">24</div>
+                            <div class="day">25</div>
+                            <div class="day has-task">
+                                <span class="date">26</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                </div>
+                            </div>
+                            <div class="day">27</div>
+                            <div class="day has-task has-class">
+                                <span class="date">28</span>
+                                <div class="indicators">
+                                    <span class="dot task-dot" title="Task due"></span>
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day has-class">
+                                <span class="date">29</span>
+                                <div class="indicators">
+                                    <span class="dot class-dot" title="Class scheduled"></span>
+                                </div>
+                            </div>
+                            <div class="day">30</div>
+                            <div class="day empty">1</div>
+                            <div class="day empty">2</div>
+                            <div class="day empty">3</div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     </div>

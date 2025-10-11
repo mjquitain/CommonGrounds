@@ -61,10 +61,7 @@
                             </header>
 
                             <div class="tasks-list">
-                                <article class="task-item urgent">
-                                    <div class="task-priority">
-                                        <span class="priority-indicator high"></span>
-                                    </div>
+                                <article class="task-item high">
                                     <div class="task-content">
                                         <h4 class="task-title">Math Assignment - Calculus Problem Set</h4>
                                         <p class="task-course">MATH 201</p>
@@ -75,10 +72,7 @@
                                     </div>
                                 </article>
 
-                                <article class="task-item">
-                                    <div class="task-priority">
-                                        <span class="priority-indicator medium"></span>
-                                    </div>
+                                <article class="task-item medium">
                                     <div class="task-content">
                                         <h4 class="task-title">Physics Lab Report</h4>
                                         <p class="task-course">PHYS 101</p>
@@ -89,10 +83,7 @@
                                     </div>
                                 </article>
 
-                                <article class="task-item">
-                                    <div class="task-priority">
-                                        <span class="priority-indicator low"></span>
-                                    </div>
+                                <article class="task-item low">
                                     <div class="task-content">
                                         <h4 class="task-title">History Essay Draft</h4>
                                         <p class="task-course">HIST 150</p>
@@ -123,8 +114,10 @@
                                     <div class="class-content">
                                         <h4 class="class-title">Calculus II</h4>
                                         <p class="class-code">MATH 201</p>
-                                        <p class="class-location">Room 142, Science Building</p>
-                                        <span class="class-status">In Progress</span>
+                                        <div class="class-meta">
+                                            <p class="class-location">Room 142, Science Building</p>
+                                            <span class="class-status">In Progress</span>
+                                        </div>
                                     </div>
                                 </article>
 
@@ -136,8 +129,10 @@
                                     <div class="class-content">
                                         <h4 class="class-title">Physics Lab</h4>
                                         <p class="class-code">PHYS 101L</p>
-                                        <p class="class-location">Lab 3, Physics Building</p>
-                                        <span class="class-status">Next</span>
+                                        <div class="class-meta">
+                                            <p class="class-location">Lab 3, Physics Building</p>
+                                            <span class="class-status">In 1 Hour</span>
+                                        </div>
                                     </div>
                                 </article>
 
@@ -149,8 +144,10 @@
                                     <div class="class-content">
                                         <h4 class="class-title">Modern History</h4>
                                         <p class="class-code">HIST 150</p>
-                                        <p class="class-location">Room 201, Humanities</p>
-                                        <span class="class-status">Later</span>
+                                        <div class="class-meta">
+                                            <p class="class-location">Room 201, Humanities</p>
+                                            <span class="class-status">In 4 Hours</span>
+                                        </div>
                                     </div>
                                 </article>
                             </div>
@@ -220,7 +217,7 @@
             </main>
         </div>
     </div>
-    
+
     <div>
         <a href="wasi.html" class="ai-chat-btn" aria-label="Open AI Assistant" title="Chat with AI Assistant">
             <span class="ai-icon">🤖</span>
