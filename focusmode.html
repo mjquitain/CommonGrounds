@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Focus Mode - CommonGrounds</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <div class="dashboard-layout">
         <aside class="sidebar">
@@ -41,149 +43,151 @@
                 </div>
             </header>
 
-            <main class="focus-content">
-                <div class="focus-view" id="focus-timer">
-                    <div class="timer-container">
-                        <div class="timer-header">
-                            <button class="timer-nav-btn" data-mode="focus">Focus</button>
-                            <button class="timer-nav-btn" data-mode="short-break">Short Break</button>
-                            <button class="timer-nav-btn" data-mode="long-break">Long Break</button>
-                        </div>
+            <main class="dashboard-main">
+                <section class="focus-content">
+                    <div class="focus-view" id="focus-timer">
+                        <div class="timer-container">
+                            <div class="timer-header">
+                                <button class="timer-nav-btn" data-mode="focus">Focus</button>
+                                <button class="timer-nav-btn" data-mode="short-break">Short Break</button>
+                                <button class="timer-nav-btn" data-mode="long-break">Long Break</button>
+                            </div>
 
-                        <div class="timer-display">
-                            <div class="timer-circle">
-                                <div class="timer-text">
-                                    <span class="timer-time" id="timer-display">25:00</span>
-                                    <span class="timer-mode" id="timer-mode-text">Focus Time</span>
+                            <div class="timer-display">
+                                <div class="timer-circle">
+                                    <div class="timer-text">
+                                        <span class="timer-time" id="timer-display">25:00</span>
+                                        <span class="timer-mode" id="timer-mode-text">Focus Time</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="timer-controls">
-                            <button class="btn btn-primary" id="start-pause-btn">Start</button>
-                            <button class="btn btn-secondary" id="reset-btn">Reset</button>
-                            <button class="btn btn-tertiary" id="skip-btn">Skip</button>
-                        </div>
-
-                        <div class="session-info">
-                            <div class="session-count">
-                                <span>Session: <span id="session-number">1</span></span>
+                            <div class="timer-controls">
+                                <button class="btn btn-primary" id="start-pause-btn">Start</button>
+                                <button class="btn btn-secondary" id="reset-btn">Reset</button>
+                                <button class="btn btn-tertiary" id="skip-btn">Skip</button>
                             </div>
-                            <div class="completed-sessions">
-                                <span>Completed: <span id="completed-count">0</span></span>
-                            </div>
-                        </div>
 
-                        <div class="timer-back">
-                            <a href="#focus-default" class="btn btn-outline">← Back to Settings</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="focus-view" id="focus-history">
-                    <div class="history-container">
-                        <div class="history-header">
-                            <h2>📊 Focus History</h2>
-                            <a href="#focus-default" class="btn btn-outline">← Back</a>
-                        </div>
-
-                        <div class="history-stats">
-                            <div class="stat-card">
-                                <div class="stat-number">12</div>
-                                <div class="stat-label">Sessions Today</div>
+                            <div class="session-info">
+                                <div class="session-count">
+                                    <span>Session: <span id="session-number">1</span></span>
+                                </div>
+                                <div class="completed-sessions">
+                                    <span>Completed: <span id="completed-count">0</span></span>
+                                </div>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-number">6h 30m</div>
-                                <div class="stat-label">Total Focus Time</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">85%</div>
-                                <div class="stat-label">Success Rate</div>
-                            </div>
-                        </div>
 
-                        <div class="recent-sessions">
-                            <h3>Recent Sessions</h3>
-                            <div class="session-list">
-                                <div class="session-item completed">
-                                    <div class="session-time">2:00 PM - 2:25 PM</div>
-                                    <div class="session-type">Focus Session</div>
-                                    <div class="session-duration">25 minutes</div>
-                                    <div class="session-status">✅ Completed</div>
-                                </div>
-                                <div class="session-item completed">
-                                    <div class="session-time">1:30 PM - 1:35 PM</div>
-                                    <div class="session-type">Short Break</div>
-                                    <div class="session-duration">5 minutes</div>
-                                    <div class="session-status">✅ Completed</div>
-                                </div>
-                                <div class="session-item completed">
-                                    <div class="session-time">1:05 PM - 1:30 PM</div>
-                                    <div class="session-type">Focus Session</div>
-                                    <div class="session-duration">25 minutes</div>
-                                    <div class="session-status">✅ Completed</div>
-                                </div>
-                                <div class="session-item skipped">
-                                    <div class="session-time">12:35 PM - 12:40 PM</div>
-                                    <div class="session-type">Short Break</div>
-                                    <div class="session-duration">5 minutes</div>
-                                    <div class="session-status">⏭️ Skipped</div>
-                                </div>
-                                <div class="session-item completed">
-                                    <div class="session-time">12:10 PM - 12:35 PM</div>
-                                    <div class="session-type">Focus Session</div>
-                                    <div class="session-duration">25 minutes</div>
-                                    <div class="session-status">✅ Completed</div>
-                                </div>
+                            <div class="timer-back">
+                                <a href="#focus-default" class="btn btn-outline">← Back to Settings</a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="focus-view" id="focus-default">
-                    <div class="focus-main">
-                        <div class="datetime-display">
-                            <div class="current-time">
-                                <span id="current-time">2:30 PM</span>
+                    <div class="focus-view" id="focus-history">
+                        <div class="history-container">
+                            <div class="history-header">
+                                <h2>📊 Focus History</h2>
+                                <a href="#focus-default" class="btn btn-outline">← Back</a>
                             </div>
-                            <div class="current-date">
-                                <span id="current-date">Saturday, September 28, 2025</span>
-                            </div>
-                        </div>
 
-                        <div class="timer-settings">
-                            <h2>Set Your Focus Timer</h2>
-                            <div class="timer-options">
-                                <div class="timer-option">
-                                    <label for="focus-time">Focus Time</label>
-                                    <div class="time-input">
-                                        <input type="number" id="focus-time" min="1" max="60" value="25">
-                                        <span>minutes</span>
-                                    </div>
+                            <div class="history-stats">
+                                <div class="stat-card">
+                                    <div class="stat-number">12</div>
+                                    <div class="stat-label">Sessions Today</div>
                                 </div>
-                                <div class="timer-option">
-                                    <label for="short-break">Short Break</label>
-                                    <div class="time-input">
-                                        <input type="number" id="short-break" min="1" max="30" value="5">
-                                        <span>minutes</span>
-                                    </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">6h 30m</div>
+                                    <div class="stat-label">Total Focus Time</div>
                                 </div>
-                                <div class="timer-option">
-                                    <label for="long-break">Long Break</label>
-                                    <div class="time-input">
-                                        <input type="number" id="long-break" min="1" max="60" value="15">
-                                        <span>minutes</span>
+                                <div class="stat-card">
+                                    <div class="stat-number">85%</div>
+                                    <div class="stat-label">Success Rate</div>
+                                </div>
+                            </div>
+
+                            <div class="recent-sessions">
+                                <h3>Recent Sessions</h3>
+                                <div class="session-list">
+                                    <div class="session-item completed">
+                                        <div class="session-time">2:00 PM - 2:25 PM</div>
+                                        <div class="session-type">Focus Session</div>
+                                        <div class="session-duration">25 minutes</div>
+                                        <div class="session-status">✅ Completed</div>
+                                    </div>
+                                    <div class="session-item completed">
+                                        <div class="session-time">1:30 PM - 1:35 PM</div>
+                                        <div class="session-type">Short Break</div>
+                                        <div class="session-duration">5 minutes</div>
+                                        <div class="session-status">✅ Completed</div>
+                                    </div>
+                                    <div class="session-item completed">
+                                        <div class="session-time">1:05 PM - 1:30 PM</div>
+                                        <div class="session-type">Focus Session</div>
+                                        <div class="session-duration">25 minutes</div>
+                                        <div class="session-status">✅ Completed</div>
+                                    </div>
+                                    <div class="session-item skipped">
+                                        <div class="session-time">12:35 PM - 12:40 PM</div>
+                                        <div class="session-type">Short Break</div>
+                                        <div class="session-duration">5 minutes</div>
+                                        <div class="session-status">⏭️ Skipped</div>
+                                    </div>
+                                    <div class="session-item completed">
+                                        <div class="session-time">12:10 PM - 12:35 PM</div>
+                                        <div class="session-type">Focus Session</div>
+                                        <div class="session-duration">25 minutes</div>
+                                        <div class="session-status">✅ Completed</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="focus-actions">
-                            <a href="#focus-history" class="btn btn-secondary">📊 View History</a>
-                            <a href="#focus-timer" class="btn btn-primary">▶️ Start Focus</a>
+                    <div class="focus-view" id="focus-default">
+                        <div class="focus-main">
+                            <div class="datetime-display">
+                                <div class="current-time">
+                                    <span id="current-time">2:30 PM</span>
+                                </div>
+                                <div class="current-date">
+                                    <span id="current-date">Saturday, September 28, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="timer-settings">
+                                <h2>Set Your Focus Timer</h2>
+                                <div class="timer-options">
+                                    <div class="timer-option">
+                                        <label for="focus-time">Focus Time</label>
+                                        <div class="time-input">
+                                            <input type="number" id="focus-time" min="1" max="60" value="25">
+                                            <span>minutes</span>
+                                        </div>
+                                    </div>
+                                    <div class="timer-option">
+                                        <label for="short-break">Short Break</label>
+                                        <div class="time-input">
+                                            <input type="number" id="short-break" min="1" max="30" value="5">
+                                            <span>minutes</span>
+                                        </div>
+                                    </div>
+                                    <div class="timer-option">
+                                        <label for="long-break">Long Break</label>
+                                        <div class="time-input">
+                                            <input type="number" id="long-break" min="1" max="60" value="15">
+                                            <span>minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="focus-actions">
+                                <a href="#focus-history" class="btn btn-secondary">📊 View History</a>
+                                <a href="#focus-timer" class="btn btn-primary">▶️ Start Focus</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </main>
         </div>
     </div>
@@ -195,4 +199,5 @@
         </a>
     </div>
 </body>
+
 </html>
