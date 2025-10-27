@@ -17,6 +17,7 @@ import { Route as protectedLearninghubIndexRouteImport } from './routes/(protect
 import { Route as protectedFocusIndexRouteImport } from './routes/(protected)/focus/index'
 import { Route as protectedDashboardIndexRouteImport } from './routes/(protected)/dashboard/index'
 import { Route as protectedCalendarIndexRouteImport } from './routes/(protected)/calendar/index'
+import { Route as protectedAiIndexRouteImport } from './routes/(protected)/ai/index'
 
 const protectedRouteRoute = protectedRouteRouteImport.update({
   id: '/(protected)',
@@ -57,10 +58,16 @@ const protectedCalendarIndexRoute = protectedCalendarIndexRouteImport.update({
   path: '/calendar/',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const protectedAiIndexRoute = protectedAiIndexRouteImport.update({
+  id: '/ai/',
+  path: '/ai/',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof protectedRouteRouteWithChildren
   '/login': typeof authLoginRoute
+  '/ai': typeof protectedAiIndexRoute
   '/calendar': typeof protectedCalendarIndexRoute
   '/dashboard': typeof protectedDashboardIndexRoute
   '/focus': typeof protectedFocusIndexRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof protectedRouteRouteWithChildren
   '/login': typeof authLoginRoute
+  '/ai': typeof protectedAiIndexRoute
   '/calendar': typeof protectedCalendarIndexRoute
   '/dashboard': typeof protectedDashboardIndexRoute
   '/focus': typeof protectedFocusIndexRoute
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/(auth)': typeof authRouteRouteWithChildren
   '/(protected)': typeof protectedRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
+  '/(protected)/ai/': typeof protectedAiIndexRoute
   '/(protected)/calendar/': typeof protectedCalendarIndexRoute
   '/(protected)/dashboard/': typeof protectedDashboardIndexRoute
   '/(protected)/focus/': typeof protectedFocusIndexRoute
@@ -90,18 +99,27 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/ai'
     | '/calendar'
     | '/dashboard'
     | '/focus'
     | '/learninghub'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/calendar' | '/dashboard' | '/focus' | '/learninghub'
+  to:
+    | '/'
+    | '/login'
+    | '/ai'
+    | '/calendar'
+    | '/dashboard'
+    | '/focus'
+    | '/learninghub'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
     | '/(protected)'
     | '/(auth)/login'
+    | '/(protected)/ai/'
     | '/(protected)/calendar/'
     | '/(protected)/dashboard/'
     | '/(protected)/focus/'
@@ -172,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedCalendarIndexRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(protected)/ai/': {
+      id: '/(protected)/ai/'
+      path: '/ai'
+      fullPath: '/ai'
+      preLoaderRoute: typeof protectedAiIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
   }
 }
 
@@ -188,6 +213,7 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 )
 
 interface protectedRouteRouteChildren {
+  protectedAiIndexRoute: typeof protectedAiIndexRoute
   protectedCalendarIndexRoute: typeof protectedCalendarIndexRoute
   protectedDashboardIndexRoute: typeof protectedDashboardIndexRoute
   protectedFocusIndexRoute: typeof protectedFocusIndexRoute
@@ -195,6 +221,7 @@ interface protectedRouteRouteChildren {
 }
 
 const protectedRouteRouteChildren: protectedRouteRouteChildren = {
+  protectedAiIndexRoute: protectedAiIndexRoute,
   protectedCalendarIndexRoute: protectedCalendarIndexRoute,
   protectedDashboardIndexRoute: protectedDashboardIndexRoute,
   protectedFocusIndexRoute: protectedFocusIndexRoute,

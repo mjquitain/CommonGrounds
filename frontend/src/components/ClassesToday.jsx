@@ -1,6 +1,7 @@
-import { Card, Group, Text, Stack, Badge, Divider } from "@mantine/core";
-import { useState, useEffect } from "react";
+import { Badge, Box, Divider, Flex, Group, Stack, Text } from "@mantine/core";
 import dayjs from "dayjs";
+import { Hourglass, Landmark } from "lucide-react";
+import { useEffect, useState } from "react";
 import { classes } from "../data/mock_classes_data";
 
 const CLASS_STATUS_COLORS = {
@@ -9,12 +10,12 @@ const CLASS_STATUS_COLORS = {
         text: "#00b7ff"
     },
     "in progress": {
-        badge: "green",
-        text: "#38a169"
+        badge: "orange",
+        text: "#ed8936",
     },
     completed: {
-        badge: "gray",
-        text: "rgb(107, 114, 128)"
+        badge: "green",
+        text: "#38a169"
     }
 };
 
@@ -73,64 +74,65 @@ export default function ClassesToday() {
     );
 
     return (
-        <div className="bg-white shadow-md rounded-2xl p-5 pb-1">
-            <Group className="flex items-center justify-between pb-3">
-                <Text className="text-xl font-medium">
-                    📚 Today's Classes
+        <Flex bg={"white"} p={"lg"} bdrs={"lg"} direction={"column"}>
+            <Flex align="center" gap={"10px"}>
+                <Landmark size={"20"} />
+                <Text fw={500} size={"lg"}>
+                    Today's Classes
                 </Text>
-                <Text style={{ cursor: "pointer" }} className="hover:underline hover:text-blue-800 text-md">
-                    View Calendar
-                </Text>
-            </Group>
+            </Flex>
 
-            <Divider className="bg-gray-200 h-0.5" />
+            <Divider my={"md"} />
 
-            <Stack className="rounded-xl pt-5">
+            <Stack spacing={"md"} bdrs={"xl"}>
                 {todaysClasses.length === 0 ? (
-                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                        <Text c="dimmed" size="sm">
+                    <Box shadow="sm" padding="lg" radius="md" withBorder ta={"center"}>
+                        <Text c="dimmed" size="md">
                             No classes today! 🎉 Enjoy your free time.
                         </Text>
-                    </Card>
+                    </Box>
                 ) : (
                     todaysClasses.map((classItem) => {
                         const status = getClassStatus(classItem, currentTime);
                         const statusColors = CLASS_STATUS_COLORS[status];
-
                         return (
-                            <Card
+                            <Box
                                 key={classItem.id}
                                 withBorder
                                 style={{
-                                    borderLeft: `5px solid ${statusColors.badge}`,
+                                    borderLeft: `5px solid ${statusColors.text}`,
                                 }}
-                                className="flex flex-col mb-5 shadow-md rounded-xl bg-gray-100"
+                                bdrs={"lg"}
+                                bg={"gray.1"}
                             >
-                                <Group className="justify-between p-4">
-                                    <div style={{ flex: 1 }}>
-                                        <Text className="font-semibold text-lg pb-2">
-                                            {classItem.subject}
-                                        </Text>
-                                        <Group className="flex items-center justify-between">
-                                            <Text
-                                                className="font-medium text-sm"
-                                            >
-                                                🕐 {classItem.time}
+                                <Flex direction={"column"} gap={"5px"} p={"md"}>
+                                    <Text fw={"500"} size={"lg"}>
+                                        {classItem.subject}
+                                    </Text>
+                                    <Group justify={"space-between"} w={"100%"}>
+                                        <Flex align={"center"} direction={"row"} gap={"xs"}>
+                                            <Hourglass size={"14"} />
+                                            <Text size={"md"} c={statusColors.text}>
+                                                {classItem.time}
                                             </Text>
-                                            <Badge
-                                                style={{ backgroundColor: statusColors.text, fontWeight: 500 }}
-                                                className="rounded-4xl pt-2 pb-2 pe-3 ps-3 text-white text-sm uppercase"
-                                            >
-                                                {status}
-                                            </Badge>
-                                        </Group>
-                                    </div>
-                                </Group>
-                            </Card>
+                                        </Flex>
+                                        <Badge
+                                            variant={"light"}
+                                            fw={500}
+                                            size={"lg"}
+                                            backgroundColor={statusColors.badge}
+                                            color={statusColors.text}
+                                            textTransform={"uppercase"}
+                                        >
+                                            {status}
+                                        </Badge>
+                                    </Group>
+                                </Flex>
+                            </Box>
                         );
                     })
                 )}
             </Stack>
-        </div>
+        </Flex >
     );
 }

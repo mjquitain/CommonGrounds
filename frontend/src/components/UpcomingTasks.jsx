@@ -1,22 +1,24 @@
-import { Card, Group, Text, Badge, Divider, Stack } from "@mantine/core";
+import { Anchor, Badge, Box, Divider, Flex, Group, Stack, Text } from "@mantine/core";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import dayjs from "dayjs";
+import { ClipboardList } from "lucide-react";
 
 const STATUS_COLORS = {
     "overdue": {
         badge: "red",
-        bg: "#e53e3e"
+        bg: "#e53e3e",
     },
     "in progress": {
         badge: "orange",
-        bg: "#ed8936"
+        bg: "#ed8936",
     },
     "not started": {
         badge: "blue",
-        bg: "#00b7ff"
+        bg: "#00b7ff",
     },
     "completed": {
         badge: "green",
-        bg: "#38a169"
+        bg: "#38a169",
     }
 };
 
@@ -44,28 +46,44 @@ export default function UpcomingTasks({ tasks }) {
             return dueDate.isBefore(today, "day") || (diffInDays >= 0 && diffInDays <= 7);
         })
         .sort((a, b) => dayjs(a.deadline).diff(dayjs(b.deadline)))
-        .slice(0, 5);
+        .slice(0, 3);
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    if (location.pathname === "/learninghub") {
+        return null;
+    }
+
+    const handleClick = () => {
+        navigate({
+            to: "/learninghub"
+        })
+    };
 
     return (
-        <div className="bg-white shadow-md rounded-2xl p-5 pb-1">
-            <Group className="flex items-center justify-between pb-3">
-                <Text className="text-xl font-medium" >
-                    🧠 Upcoming Tasks
-                </Text>
-                <Text style={{ cursor: "pointer" }} className="hover:underline hover:text-blue-800 text-md">
-                    View All
-                </Text>
+        <Flex bg={"white"} p={"lg"} bdrs={"lg"} direction={"column"}>
+            <Group justify="space-between" align="center">
+                <Flex align="center" gap={"10px"}>
+                    <ClipboardList size={"20"} />
+                    <Text fw={500} size={"lg"}>
+                        Upcoming Tasks
+                    </Text>
+                </Flex>
+                <Anchor underline="hover" style={{ color: "#667eea" }} fw={500} onClick={handleClick}>
+                    View Tasks
+                </Anchor>
             </Group>
 
-            <Divider className="bg-gray-200 h-0.5" />
+            <Divider my={"md"} />
 
-            <Stack className="rounded-xl pt-5">
+            <Stack spacing={"md"} bdrs={"xl"}>
                 {filteredTasks.length === 0 ? (
-                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                        <Text c="dimmed" size="sm">
-                            No upcoming or overdue tasks 🎉
+                    <Box shadow="sm" padding="lg" radius="md" withBorder ta={"center"}>
+                        <Text c="dimmed" size="md">
+                            No upcoming or due tasks! 🎉
                         </Text>
-                    </Card>
+                    </Box>
                 ) : (
                     filteredTasks.map((task) => {
                         const dueDate = dayjs(task.deadline);
@@ -80,54 +98,57 @@ export default function UpcomingTasks({ tasks }) {
                                 : diffInDays === 1
                                     ? `Tomorrow, ${dueDate.format("h:mm A")}`
                                     : `Due ${dueDate.format("dddd")} — ${formatDeadline(task.deadline)}`;
-
                         return (
-                            <Card
+                            <Box
                                 key={task.id}
                                 withBorder
                                 style={{
-                                    borderLeft: `5px solid ${statusColors.badge}`,
+                                    borderLeft: `5px solid ${statusColors.bg}`,
                                 }}
-                                className="flex flex-col mb-5 shadow-md rounded-xl bg-gray-100"
+                                bdrs={"lg"}
+                                bg={"gray.1"}
                             >
-                                <Group className="justify-between p-4">
-                                    <div style={{ flex: 1 }}>
-                                        <Text className="font-semibold text-lg">
+                                <Stack justify="center" align={"flex-start"} gap={"xs"} p={"md"}>
+                                    <Flex direction={"column"}>
+                                        <Text fw={500} size={"xl"}>
                                             {task.title}
                                         </Text>
-                                        <Text className="text-sm font-medium pb-2">
+                                        <Text size={"md"}>
                                             {task.subject}
                                         </Text>
-                                        <Group className="flex items-center justify-between">
-                                            <Text
-                                                className="font-medium text-sm"
-                                                style={{
-                                                    color: isOverdue
-                                                        ? "rgb(220, 38, 38)"
-                                                        : diffInDays <= 7
-                                                            ? "rgb(234, 88, 12)"
-                                                            : "rgb(107, 114, 128)"
-                                                }}
+                                    </Flex>
+                                    <Group justify={"space-between"} w={"100%"}>
+                                        <Group align={"center"}>
+                                            <Text size={"md"} fw={500} style={{
+                                                color: isOverdue
+                                                    ? "rgb(220, 38, 38)"
+                                                    : diffInDays <= 7
+                                                        ? "rgb(234, 88, 12)"
+                                                        : "rgb(107, 114, 128)"
+                                            }}
                                             >
                                                 Due: {dueLabel}
                                             </Text>
-                                            <Badge
-                                                style={{
-                                                    backgroundColor: statusColors.bg,
-                                                    fontWeight: 500,
-                                                }}
-                                                className="flex rounded-4xl pt-2 pb-2 pe-3 ps-3 text-white text-sm"
-                                            >
-                                                {task.status?.toUpperCase()}
-                                            </Badge>
                                         </Group>
-                                    </div>
-                                </Group>
-                            </Card>
+                                        <Badge
+                                            variant={"light"}
+                                            fw={500}
+                                            size={"lg"}
+                                            backgroundColor={statusColors.badge}
+                                            color={statusColors.bg}
+                                            textTransform={"uppercase"}
+                                        >
+                                            {task.status}
+
+                                        </Badge>
+                                    </Group>
+                                </Stack>
+
+                            </Box>
                         );
                     })
                 )}
             </Stack>
-        </div>
+        </Flex>
     );
 }
