@@ -187,27 +187,26 @@ export default function LearningHubPage() {
                     ]}
                     style={{ flex: "1 1 180px", minWidth: "150px" }}
                   />
-                </Group>
-
-                <Group gap="md">
-                  <Button
-                    leftSection={<RefreshCw size={18} />}
-                    variant="gradient"
-                    gradient={{ from: "#667eea", to: "#764ba2" }}
-                    onClick={() => console.log("Sync LMS")}
-                    style={{ fontWeight: 600 }}
-                  >
-                    Sync LMS
-                  </Button>
-                  <Button
-                    leftSection={<Plus size={18} />}
-                    variant="filled"
-                    color="teal"
-                    onClick={handleAddTask}
-                    style={{ fontWeight: 600 }}
-                  >
-                    Add Task
-                  </Button>
+                  <Group gap="md">
+                    <Button
+                      leftSection={<RefreshCw size={18} />}
+                      variant="gradient"
+                      gradient={{ from: "#667eea", to: "#764ba2" }}
+                      onClick={() => console.log("Sync LMS")}
+                      style={{ fontWeight: 600 }}
+                    >
+                      Sync LMS
+                    </Button>
+                    <Button
+                      leftSection={<Plus size={18} />}
+                      variant="filled"
+                      color="teal"
+                      onClick={handleAddTask}
+                      style={{ fontWeight: 600 }}
+                    >
+                      Add Task
+                    </Button>
+                  </Group>
                 </Group>
               </Stack>
 

@@ -26,7 +26,7 @@ export default function AIAssistant() {
             }}
         >
             <ActionIcon
-                size={64}
+                size={50}
                 radius="xl"
                 variant="gradient"
                 gradient={{ from: "#667eea", to: "#764ba2" }}
