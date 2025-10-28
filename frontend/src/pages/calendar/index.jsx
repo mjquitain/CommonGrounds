@@ -1,30 +1,232 @@
-import { Box, Button, Flex, Grid, Group, Stack, Text, rem } from "@mantine/core";
+import { Alert, Box, Button, Flex, Grid, Group, Loader, Modal, Select, Stack, Text, TextInput, Textarea, rem } from "@mantine/core";
+import { DateTimePicker } from "@mantine/dates";
 import dayjs from "dayjs";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AlertCircle, CalendarDays, CalendarMinus2, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useState } from "react";
 import DateTimeDisplay from "../../components/DateTimeDisplay";
+import { modules } from "../../data/mock_modules_data";
+import { useTasks } from "../../hooks/useTasks";
 
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState(new Date(2025, 8, 28)); // Sept 28, 2025
   const [view, setView] = useState("month");
+  const { tasks, addTask, updateTask, deleteTask } = useTasks();
 
-  // Mock events data
-  const events = {
-    "2025-09-05": [{ type: "deadline" }],
-    "2025-09-07": [{ type: "task" }, { type: "task" }],
-    "2025-09-08": [{ type: "deadline" }],
-    "2025-09-14": [{ type: "task" }, { type: "deadline" }],
-    "2025-09-15": [{ type: "deadline" }],
-    "2025-09-21": [{ type: "task" }],
-    "2025-09-22": [{ type: "deadline" }],
-    "2025-09-26": [{ type: "task" }],
-    "2025-09-28": [{ type: "task" }, { type: "deadline" }],
-    "2025-09-29": [{ type: "deadline" }],
+  // Modal states
+  const [modalOpened, setModalOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [editingEvent, setEditingEvent] = useState(null);
+
+  // Form data
+  const [formData, setFormData] = useState({
+    eventType: "task",
+    title: "",
+    description: "",
+    subject: "",
+    dueDate: null,
+    priority: "Medium Priority",
+    status: "Not Started",
+    instructor: "",
+  });
+
+  // Helper function to get event color based on type and priority
+  const getEventColor = (event) => {
+    if (event.eventType === "class") {
+      // Find the module color for this class
+      const module = modules.find(m => m.title === event.title);
+      return module ? module.color : "#5c6fda";
+    }
+
+    // For tasks, use priority-based colors
+    if (event.priority === "High Priority") return "#fa5252";
+    if (event.priority === "Medium Priority") return "#fd7e14";
+    return "#339af0";
+  };
+
+  // Helper function to get event icon
+  const getEventIcon = (event) => {
+    if (event.eventType === "class") return "🏫";
+    if (event.eventType === "study-session") return "📚";
+    if (event.eventType === "meeting") return "👥";
+    if (event.eventType === "presentation") return "🎤";
+    return "✓";
+  };
+
+  // Modal handlers
+  const handleOpenModal = (event = null, date = null) => {
+    if (event) {
+      // Editing existing event (skip recurring classes)
+      if (event.isRecurring) return;
+
+      setEditingEvent(event);
+      setFormData({
+        eventType: event.eventType || "task",
+        title: event.title || "",
+        description: event.description || "",
+        subject: event.subject || "",
+        dueDate: event.deadline ? new Date(event.deadline) : null,
+        priority: event.priority || "Medium Priority",
+        status: event.status || "Not Started",
+        instructor: event.instructor || "",
+      });
+    } else {
+      // Creating new event
+      setEditingEvent(null);
+      setFormData({
+        eventType: "task",
+        title: "",
+        description: "",
+        subject: "",
+        dueDate: date || new Date(),
+        priority: "Medium Priority",
+        status: "Not Started",
+        instructor: "",
+      });
+    }
+    setError(null);
+    setModalOpened(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpened(false);
+    setEditingEvent(null);
+    setError(null);
+    setFormData({
+      eventType: "task",
+      title: "",
+      description: "",
+      subject: "",
+      dueDate: null,
+      priority: "Medium Priority",
+      status: "Not Started",
+      instructor: "",
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setError(null);
+      setIsLoading(true);
+
+      // Validation
+      if (!formData.title.trim()) {
+        setError("Title is required");
+        setIsLoading(false);
+        return;
+      }
+
+      if (!formData.dueDate) {
+        setError("Date & Time is required");
+        setIsLoading(false);
+        return;
+      }
+
+      // Prepare event data
+      const eventData = {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        subject: formData.subject.trim(),
+        deadline: formData.dueDate.toISOString(),
+        eventType: formData.eventType,
+        category: formData.eventType === "task" ? "Homework" : formData.eventType,
+        ...(formData.eventType === "task" && {
+          priority: formData.priority,
+          status: formData.status,
+        }),
+        ...(formData.instructor && { instructor: formData.instructor }),
+      };
+
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      if (editingEvent) {
+        // Update existing event
+        updateTask(editingEvent.id, eventData);
+      } else {
+        // Add new event
+        addTask(eventData);
+      }
+
+      setIsLoading(false);
+      handleCloseModal();
+    } catch (err) {
+      setError(err.message || "Failed to save event");
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteEvent = async () => {
+    if (!editingEvent) return;
+
+    try {
+      setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      deleteTask(editingEvent.id);
+      setIsLoading(false);
+      handleCloseModal();
+    } catch (err) {
+      setError(err.message || "Failed to delete event");
+      setIsLoading(false);
+    }
+  };
+
+  // Parse class schedule to get days of week
+  const getClassDays = (schedule) => {
+    const days = [];
+    const dayMap = {
+      'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 0
+    };
+
+    Object.entries(dayMap).forEach(([day, num]) => {
+      if (schedule.toLowerCase().includes(day.toLowerCase())) {
+        days.push(num);
+      }
+    });
+
+    return days;
   };
 
   const getEventsForDate = (date) => {
     const dateStr = dayjs(date).format("YYYY-MM-DD");
-    return events[dateStr] || [];
+    const dayOfWeek = dayjs(date).day();
+    const events = [];
+
+    // Add tasks that are due on this date
+    tasks.forEach(task => {
+      const taskDate = dayjs(task.deadline).format("YYYY-MM-DD");
+      if (taskDate === dateStr) {
+        events.push({
+          ...task,
+          eventType: "task",
+          type: "task",
+          time: dayjs(task.deadline).format("h:mm A")
+        });
+      }
+    });
+
+    // Add classes that occur on this day of the week
+    modules.forEach(module => {
+      const classDays = getClassDays(module.schedule);
+      if (classDays.includes(dayOfWeek)) {
+        // Extract time from schedule
+        const timeMatch = module.schedule.match(/(\d+:\d+\s*[AP]M\s*-\s*\d+:\d+\s*[AP]M)/i);
+        events.push({
+          id: `class-${module.id}-${dateStr}`,
+          title: module.title,
+          subject: module.title,
+          instructor: module.instructor,
+          code: module.code,
+          eventType: "class",
+          type: "class",
+          time: timeMatch ? timeMatch[1] : module.schedule,
+          color: module.color,
+          isRecurring: true
+        });
+      }
+    });
+
+    return events;
   };
 
   const getDaysInMonth = (date) => {
@@ -145,18 +347,28 @@ export default function CalendarPage() {
 
           <Group gap="sm">
             <Button
+              variant="filled"
+              size="xs"
+              leftSection={<Plus size={16} />}
+              onClick={() => handleOpenModal(null, selectedDate)}
+            >
+              Add Event
+            </Button>
+            <Button
               variant={view === "month" ? "filled" : "subtle"}
               size="xs"
               onClick={() => setView("month")}
+              leftSection={<CalendarDays size={16} />}
             >
-              📅 Month
+              Month
             </Button>
             <Button
               variant={view === "week" ? "filled" : "subtle"}
               size="xs"
               onClick={() => setView("week")}
+              leftSection={<CalendarMinus2 size={16} />}
             >
-              📋 Week
+              Week
             </Button>
           </Group>
         </Group>
@@ -229,21 +441,45 @@ export default function CalendarPage() {
                           {day.date.date()}
                         </Text>
 
-                        {/* Event dots */}
+                        {/* Event count indicators */}
                         {dateEvents.length > 0 && (
-                          <Flex gap={4} mt="xs" justify="center">
-                            {dateEvents.map((evt, i) => (
-                              <Box
-                                key={i}
-                                w={6}
-                                h={6}
-                                bg={evt.type === "deadline" ? "orange" : "blue"}
-                                style={{
-                                  borderRadius: "50%",
-                                }}
-                              />
-                            ))}
-                          </Flex>
+                          <Stack gap={4} mt="xs" align="center">
+                            {(() => {
+                              const taskCount = dateEvents.filter(e => e.eventType === "task").length;
+                              const classCount = dateEvents.filter(e => e.eventType === "class").length;
+
+                              return (
+                                <>
+                                  {taskCount > 0 && (
+                                    <Flex gap={4} align="center">
+                                      <Box
+                                        w={8}
+                                        h={8}
+                                        bg="#5c6fda"
+                                        style={{ borderRadius: "50%" }}
+                                      />
+                                      <Text size="xs" fw={500} c={selected ? "white" : "dark"}>
+                                        {taskCount} {taskCount === 1 ? "task" : "tasks"}
+                                      </Text>
+                                    </Flex>
+                                  )}
+                                  {classCount > 0 && (
+                                    <Flex gap={4} align="center">
+                                      <Box
+                                        w={8}
+                                        h={8}
+                                        bg="#38a169"
+                                        style={{ borderRadius: "50%" }}
+                                      />
+                                      <Text size="xs" fw={500} c={selected ? "white" : "dark"}>
+                                        {classCount} {classCount === 1 ? "class" : "classes"}
+                                      </Text>
+                                    </Flex>
+                                  )}
+                                </>
+                              );
+                            })()}
+                          </Stack>
                         )}
                       </Box>
                     </Grid.Col>
@@ -315,14 +551,40 @@ export default function CalendarPage() {
                                 key={i}
                                 p="sm"
                                 style={{
-                                  backgroundColor: evt.type === "deadline" ? "#fff3bf" : "#e7f5ff",
-                                  border: `2px solid ${evt.type === "deadline" ? "#ff922b" : "#5c6fda"}`,
+                                  backgroundColor: evt.eventType === "class"
+                                    ? `${evt.color}15`
+                                    : evt.priority === "High Priority"
+                                      ? "#fff5f5"
+                                      : evt.priority === "Medium Priority"
+                                        ? "#fff4e6"
+                                        : "#e7f5ff",
+                                  border: `2px solid ${getEventColor(evt)}`,
                                   borderRadius: "6px",
+                                  cursor: evt.isRecurring ? "default" : "pointer",
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (!evt.isRecurring) {
+                                    handleOpenModal(evt);
+                                  }
                                 }}
                               >
-                                <Text size="xs" fw={500}>
-                                  {evt.type === "deadline" ? "⏰ Deadline" : "✓ Task"}
+                                <Text size="xs" fw={600} mb={4}>
+                                  {getEventIcon(evt)} {evt.title}
                                 </Text>
+                                <Text size="xs" c="dimmed">
+                                  {evt.time}
+                                </Text>
+                                {evt.eventType === "class" && evt.instructor && (
+                                  <Text size="xs" c="dimmed">
+                                    {evt.instructor}
+                                  </Text>
+                                )}
+                                {evt.eventType === "task" && evt.subject && (
+                                  <Text size="xs" c="dimmed">
+                                    {evt.subject}
+                                  </Text>
+                                )}
                               </Box>
                             ))
                           ) : (
@@ -338,6 +600,140 @@ export default function CalendarPage() {
           )}
         </Box>
       </Stack>
+
+      {/* Event Modal */}
+      <Modal
+        opened={modalOpened}
+        onClose={handleCloseModal}
+        title={editingEvent ? "Edit Event" : "Create Event"}
+        size="lg"
+      >
+        <Stack gap="md">
+          {error && (
+            <Alert icon={<AlertCircle size={16} />} color="red" variant="light">
+              {error}
+            </Alert>
+          )}
+
+          <Select
+            label="Event Type"
+            required
+            data={[
+              { value: "task", label: "✓ Task" },
+              { value: "study-session", label: "📚 Study Session" },
+              { value: "meeting", label: "👥 Meeting" },
+              { value: "presentation", label: "🎤 Presentation" },
+              { value: "class", label: "🏫 Class" },
+            ]}
+            value={formData.eventType}
+            onChange={(value) => setFormData({ ...formData, eventType: value })}
+            disabled={isLoading}
+          />
+
+          <TextInput
+            label="Title"
+            placeholder={
+              formData.eventType === "task"
+                ? "Enter task title"
+                : formData.eventType === "study-session"
+                  ? "Enter study session title"
+                  : formData.eventType === "meeting"
+                    ? "Enter meeting title"
+                    : formData.eventType === "presentation"
+                      ? "Enter presentation title"
+                      : "Enter class title"
+            }
+            required
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            disabled={isLoading}
+          />
+
+          <Textarea
+            label="Description"
+            placeholder="Enter description (optional)"
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            disabled={isLoading}
+            minRows={3}
+          />
+
+          <Select
+            label="Course"
+            placeholder="Select a course (optional)"
+            data={modules.map(m => ({ value: m.title, label: `${m.code} - ${m.title}` }))}
+            value={formData.subject}
+            onChange={(value) => setFormData({ ...formData, subject: value })}
+            disabled={isLoading}
+            clearable
+          />
+
+          <DateTimePicker
+            label="Date & Time"
+            placeholder="Select date and time"
+            required
+            value={formData.dueDate}
+            onChange={(value) => setFormData({ ...formData, dueDate: value })}
+            disabled={isLoading}
+            minDate={new Date()}
+          />
+
+          {formData.eventType === "task" && (
+            <>
+              <Select
+                label="Priority"
+                required
+                data={["Low Priority", "Medium Priority", "High Priority"]}
+                value={formData.priority}
+                onChange={(value) => setFormData({ ...formData, priority: value })}
+                disabled={isLoading}
+              />
+
+              <Select
+                label="Status"
+                required
+                data={["Not Started", "In Progress", "Completed"]}
+                value={formData.status}
+                onChange={(value) => setFormData({ ...formData, status: value })}
+                disabled={isLoading}
+              />
+            </>
+          )}
+
+          {formData.eventType === "class" && (
+            <TextInput
+              label="Instructor"
+              placeholder="Enter instructor name (optional)"
+              value={formData.instructor}
+              onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
+              disabled={isLoading}
+            />
+          )}
+
+          <Group justify="space-between" mt="md">
+            <Group>
+              {editingEvent && (
+                <Button
+                  variant="light"
+                  color="red"
+                  onClick={handleDeleteEvent}
+                  disabled={isLoading}
+                >
+                  {isLoading ? <Loader size="xs" /> : "Delete"}
+                </Button>
+              )}
+            </Group>
+            <Group>
+              <Button variant="subtle" onClick={handleCloseModal} disabled={isLoading}>
+                Cancel
+              </Button>
+              <Button onClick={handleSubmit} disabled={isLoading}>
+                {isLoading ? <Loader size="xs" /> : editingEvent ? "Update" : "Create"}
+              </Button>
+            </Group>
+          </Group>
+        </Stack>
+      </Modal>
     </Stack>
   );
 }

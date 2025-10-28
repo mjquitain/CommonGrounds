@@ -1,4 +1,4 @@
-import { ActionIcon, Badge, Box, Button, Flex, Group, Modal, Progress, Stack, Text } from "@mantine/core";
+import { ActionIcon, Badge, Box, Flex, Group, Modal, Progress, Stack, Text } from "@mantine/core";
 import dayjs from "dayjs";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -160,6 +160,7 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                     maxWidth: "517px",
                                     width: "100%",
                                     minHeight: "280px",
+                                    maxHeight: "300px",
                                     display: "flex",
                                     flexDirection: "column",
                                     justifyContent: "space-between",
@@ -174,7 +175,7 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                     e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
                                 }}
                             >
-                                <Group justify="space-between" p="lg">
+                                <Group justify="space-between" p={"md"} pb={0}>
                                     <Badge
                                         variant={"light"}
                                         fw={500}
@@ -211,7 +212,7 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                     </Group>
                                 </Group>
 
-                                <Flex direction={"column"} p={"lg"} gap={"sm"} style={{ flexGrow: 1, justifyContent: "space-between" }}>
+                                <Flex direction={"column"} p={"md"} gap={"sm"}>
                                     <Box>
                                         <Text fw={700} size={"xl"}>
                                             {task.title}
@@ -281,17 +282,23 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                 color="gray"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    console.log("Edit task:", selectedTask?.id);
+                                    if (onEdit && selectedTask) {
+                                        setOpened(false);
+                                        onEdit(selectedTask);
+                                    }
                                 }}
                             >
                                 <Pencil size={18} />
                             </ActionIcon>
                             <ActionIcon
                                 variant="subtle"
-                                color="gray"
+                                color="red"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    console.log("Delete task:", selectedTask?.id);
+                                    if (onDelete && selectedTask && window.confirm(`Are you sure you want to delete "${selectedTask.title}"?`)) {
+                                        setOpened(false);
+                                        onDelete(selectedTask.id);
+                                    }
                                 }}
                             >
                                 <Trash2 size={18} />
@@ -361,7 +368,7 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                 </Box>
                             )}
 
-                            <Box>
+                            <Box mb={"xs"}>
                                 <Group justify="space-between" mb="xs">
                                     <Text fw={600} size="sm">Progress:</Text>
                                     <Text size="sm" c="dimmed">
@@ -375,19 +382,6 @@ export default function DetailedTasks({ tasks = [], onEdit, onDelete }) {
                                     radius="xl"
                                 />
                             </Box>
-
-                            <Group justify="flex-end">
-                                <Button
-                                    variant="gradient"
-                                    gradient={{ from: "#667eea", to: "#764ba2" }}
-                                    onClick={() => {
-                                        console.log("Start/Continue task:", selectedTask.id);
-                                    }}
-                                    radius={"lg"}
-                                >
-                                    {selectedTask.status === "Not Started" ? "Start Task" : "Continue"}
-                                </Button>
-                            </Group>
                         </Flex>
                     </Stack>
                 )}

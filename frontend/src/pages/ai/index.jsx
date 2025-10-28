@@ -1,7 +1,7 @@
 import { ActionIcon, Avatar, Box, Button, Divider, FileButton, Flex, Grid, Group, rem, ScrollArea, Stack, Text, TextInput, Title } from "@mantine/core";
 import { IconMessagePlus, IconSearch } from '@tabler/icons-react';
 import { Paperclip, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const WASI_AVATAR_URL = "https://images.unsplash.com/vector-1756774243068-0bd49156883d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1160";
 
@@ -15,6 +15,33 @@ function AIPage() {
         },
     ]);
     const [inputValue, setInputValue] = useState("");
+    const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+    // Update time every second
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentDateTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const formatDate = (date) => {
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    };
+
+    const formatTime = (date) => {
+        return date.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+    };
 
     const handleSendMessage = () => {
         if (inputValue.trim()) {
@@ -48,7 +75,7 @@ function AIPage() {
                     {/* Sidebar */}
                     < Stack gap="md"
                         h={"100%"}
-                        maw={rem(228)}
+                        maw={rem(300)}
                         className="border-r-[1px] border-gray-300"
                         px={rem(7)}
                         py={"lg"}
@@ -114,10 +141,10 @@ function AIPage() {
                                 Wasi
                             </Text>
                             <Text size="sm" c="dimmed">
-                                September 28, 2025
+                                {formatDate(currentDateTime)}
                             </Text>
                             <Text size="sm" c="dimmed">
-                                2:30:53
+                                {formatTime(currentDateTime)}
                             </Text>
                         </Box>
 

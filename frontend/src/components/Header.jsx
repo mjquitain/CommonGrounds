@@ -1,9 +1,18 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
+import { CalendarDays, Home, ListChecks, LogOut, Menu, Target, X } from 'lucide-react'
 import { useState } from 'react'
-import { Home, Menu, ListChecks, CalendarDays, Target, X } from 'lucide-react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    const confirmed = window.confirm('Are you sure you want to log out?')
+    if (confirmed) {
+      setIsOpen(false)
+      navigate({ to: '/login' })
+    }
+  }
 
   return (
     <>
@@ -15,21 +24,11 @@ export default function Header() {
         >
           <Menu size={20} />
         </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
       </header>
 
       <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-br from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-br from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-violet-300">
           <div>
@@ -84,7 +83,7 @@ export default function Header() {
             <CalendarDays size={20} />
             <span className="font-medium">Calendar</span>
           </Link>
-          
+
           <Link
             to="/focus"
             onClick={() => setIsOpen(false)}
@@ -98,6 +97,16 @@ export default function Header() {
             <span className="font-medium">Focus Mode</span>
           </Link>
         </nav>
+
+        <div className="p-4 border-t border-violet-300">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-violet-300 hover:text-black transition-colors w-full text-left"
+          >
+            <LogOut size={20} />
+            <span className="font-medium">Log Out</span>
+          </button>
+        </div>
       </aside>
     </>
   )

@@ -104,11 +104,24 @@ export default function ClassesToday() {
                                 }}
                                 bdrs={"lg"}
                                 bg={"gray.1"}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = "translateY(-2px)";
+                                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = "translateY(0)";
+                                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+                                }}
                             >
                                 <Flex direction={"column"} gap={"5px"} p={"md"}>
-                                    <Text fw={"500"} size={"lg"}>
-                                        {classItem.subject}
-                                    </Text>
+                                    <Box mb={"xs"}>
+                                        <Text fw={"500"} size={"lg"}>
+                                            {classItem.subject}
+                                        </Text>
+                                        <Text size={"md"}>
+                                            {classItem.instructor}
+                                        </Text>
+                                    </Box>
                                     <Group justify={"space-between"} w={"100%"}>
                                         <Flex align={"center"} direction={"row"} gap={"xs"}>
                                             <Hourglass size={"14"} />

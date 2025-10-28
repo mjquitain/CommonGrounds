@@ -107,6 +107,14 @@ export default function UpcomingTasks({ tasks }) {
                                 }}
                                 bdrs={"lg"}
                                 bg={"gray.1"}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = "translateY(-2px)";
+                                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = "translateY(0)";
+                                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+                                }}
                             >
                                 <Stack justify="center" align={"flex-start"} gap={"xs"} p={"md"}>
                                     <Flex direction={"column"}>
