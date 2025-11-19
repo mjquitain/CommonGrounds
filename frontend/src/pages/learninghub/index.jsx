@@ -1,7 +1,7 @@
 import DetailedTasks from "@/components/DetailedTasks";
 import Modules from "@/components/Modules";
 import TaskFormModal from "@/components/TaskFormModal";
-import { Badge, Button, Group, rem, Select, Stack, Tabs } from "@mantine/core";
+import { Badge, Button, Checkbox, Group, Modal, rem, Select, Stack, Tabs, Text } from "@mantine/core";
 import { ClipboardCheck, Component, Plus, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import DateTimeDisplay from "../../components/datetimedisplay";
@@ -15,6 +15,14 @@ export default function LearningHubPage() {
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [taskFormOpened, setTaskFormOpened] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [syncModalOpened, setSyncModalOpened] = useState(false);
+  const [selectedLMS, setSelectedLMS] = useState("");
+  const [syncTasks, setSyncTasks] = useState(true);
+  const [syncModules, setSyncModules] = useState(true);
+  const [autoSync, setAutoSync] = useState(false);
+  const [syncFrequency, setSyncFrequency] = useState("daily");
+  const [syncing, setSyncing] = useState(false);
+  const [lastSynced, setLastSynced] = useState(new Date(Date.now() - 2 * 60 * 60 * 1000));
 
   const { tasks, addTask, updateTask, deleteTask } = useTasks();
 
@@ -73,6 +81,13 @@ export default function LearningHubPage() {
     deleteTask(taskId);
   };
 
+  const handleSyncNow = async () => {
+    setSyncing(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setLastSynced(new Date());
+    setSyncing(false);
+    setSyncModalOpened(false);
+  };
 
   return (
     <>
@@ -82,6 +97,103 @@ export default function LearningHubPage() {
         onSave={handleSaveTask}
         task={editingTask}
       />
+
+      <Modal
+        opened={syncModalOpened}
+        onClose={() => setSyncModalOpened(false)}
+        title={<Text fw={700} size="lg">Sync with LMS</Text>}
+        size="md"
+        centered
+      >
+        <Stack gap="md">
+          <Text size="sm" c="dimmed">
+            Synchronize your tasks and modules from your Learning Management System. Choose what you'd like to sync and how often.
+          </Text>
+
+          <Text size="sm" c="dimmed">
+            Last synced: {lastSynced.toLocaleString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true
+            })}
+          </Text>
+
+          <Select
+            label="Learning Management System"
+            placeholder="Select your LMS"
+            value={selectedLMS}
+            onChange={setSelectedLMS}
+            data={[
+              { value: "canvas", label: "Canvas" },
+              { value: "blackboard", label: "Blackboard" },
+              { value: "moodle", label: "Moodle" },
+              { value: "brightspace", label: "Brightspace (D2L)" },
+              { value: "schoology", label: "Schoology" },
+              { value: "google-classroom", label: "Google Classroom" },
+              { value: "microsoft-teams", label: "Microsoft Teams" },
+              { value: "other", label: "Other" },
+            ]}
+            required
+            withAsterisk
+          />
+
+          <Select
+            label="Sync Frequency"
+            placeholder="Select frequency"
+            value={syncFrequency}
+            onChange={setSyncFrequency}
+            data={[
+              { value: "manual", label: "Manual Only" },
+              { value: "hourly", label: "Every Hour" },
+              { value: "daily", label: "Daily" },
+              { value: "weekly", label: "Weekly" },
+            ]}
+          />
+
+          <Stack gap="xs">
+            <Checkbox
+              label="Sync Tasks"
+              description="Import assignments and homework from your LMS"
+              checked={syncTasks}
+              onChange={(e) => setSyncTasks(e.currentTarget.checked)}
+            />
+            <Checkbox
+              label="Sync Modules"
+              description="Import course modules and learning materials"
+              checked={syncModules}
+              onChange={(e) => setSyncModules(e.currentTarget.checked)}
+            />
+            <Checkbox
+              label="Auto-sync"
+              description="Automatically sync based on the frequency above"
+              checked={autoSync}
+              onChange={(e) => setAutoSync(e.currentTarget.checked)}
+            />
+          </Stack>
+
+          <Group justify="flex-end" mt="md">
+            <Button
+              variant="subtle"
+              onClick={() => setSyncModalOpened(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              leftSection={<RefreshCw size={18} />}
+              variant="gradient"
+              gradient={{ from: "#667eea", to: "#764ba2" }}
+              onClick={handleSyncNow}
+              loading={syncing}
+              disabled={!selectedLMS || (!syncTasks && !syncModules)}
+            >
+              Sync Now
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
 
       <Stack
         align={"center"}
@@ -102,10 +214,7 @@ export default function LearningHubPage() {
               <Tabs.Tab
                 value="tasks"
                 leftSection={
-                  <Group align="center">
-                    <ClipboardCheck size={18} />
-                    Tasks
-                  </Group>
+                  <ClipboardCheck size={18} />
                 }
                 rightSection={
                   <Badge
@@ -122,14 +231,13 @@ export default function LearningHubPage() {
                   fontWeight: 600,
                   padding: "12px 24px",
                 }}
-              />
+              >
+                Tasks
+              </Tabs.Tab>
               <Tabs.Tab
                 value="modules"
                 leftSection={
-                  <Group align="center">
-                    <Component size={18} />
-                    Modules
-                  </Group>
+                  <Component size={18} />
                 }
                 rightSection={
                   <Badge
@@ -147,6 +255,7 @@ export default function LearningHubPage() {
                   padding: "12px 24px",
                 }}
               >
+                Modules
               </Tabs.Tab>
             </Tabs.List>
 
@@ -181,18 +290,18 @@ export default function LearningHubPage() {
                     onChange={setPriorityFilter}
                     data={[
                       { value: "all", label: "All Priorities" },
-                      { value: "high", label: "High Priority" },
-                      { value: "medium", label: "Medium Priority" },
-                      { value: "low", label: "Low Priority" },
+                      { value: "high priority", label: "High Priority" },
+                      { value: "medium priority", label: "Medium Priority" },
+                      { value: "low priority", label: "Low Priority" },
                     ]}
                     style={{ flex: "1 1 180px", minWidth: "150px" }}
                   />
                   <Group gap="md">
                     <Button
                       leftSection={<RefreshCw size={18} />}
-                      variant="gradient"
-                      gradient={{ from: "#667eea", to: "#764ba2" }}
-                      onClick={() => console.log("Sync LMS")}
+                      variant="filled"
+                      color="violet"
+                      onClick={() => setSyncModalOpened(true)}
                       style={{ fontWeight: 600 }}
                     >
                       Sync LMS
@@ -218,65 +327,6 @@ export default function LearningHubPage() {
             </Tabs.Panel>
 
             <Tabs.Panel value="modules" pt="xl">
-              <Stack gap="md" mb="xl">
-                <Group gap="md">
-                  <Select
-                    placeholder="All Courses"
-                    value={courseFilter}
-                    onChange={setCourseFilter}
-                    data={[
-                      { value: "all", label: "All Courses" },
-                      ...courses.map(course => ({ value: course, label: course }))
-                    ]}
-                    style={{ flex: "1 1 180px", minWidth: "150px" }}
-                  />
-                  <Select
-                    placeholder="All Status"
-                    value={statusFilter}
-                    onChange={setStatusFilter}
-                    data={[
-                      { value: "all", label: "All Status" },
-                      { value: "not-started", label: "Not Started" },
-                      { value: "in-progress", label: "In Progress" },
-                      { value: "completed", label: "Completed" },
-                    ]}
-                    style={{ flex: "1 1 180px", minWidth: "150px" }}
-                  />
-                  <Select
-                    placeholder="All Priorities"
-                    value={priorityFilter}
-                    onChange={setPriorityFilter}
-                    data={[
-                      { value: "all", label: "All Priorities" },
-                      { value: "high", label: "High Priority" },
-                      { value: "medium", label: "Medium Priority" },
-                      { value: "low", label: "Low Priority" },
-                    ]}
-                    style={{ flex: "1 1 180px", minWidth: "150px" }}
-                  />
-                </Group>
-                <Group gap="md">
-                  <Button
-                    leftSection={<RefreshCw size={18} />}
-                    variant="gradient"
-                    gradient={{ from: "#667eea", to: "#764ba2" }}
-                    onClick={() => console.log("Sync LMS")}
-                    style={{ fontWeight: 600 }}
-                  >
-                    Sync LMS
-                  </Button>
-                  <Button
-                    leftSection={<Plus size={18} />}
-                    variant="filled"
-                    color="teal"
-                    onClick={handleAddTask}
-                    style={{ fontWeight: 600 }}
-                  >
-                    Add Task
-                  </Button>
-                </Group>
-              </Stack>
-
               <Modules
                 modules={filteredModules}
                 onEdit={handleEditTask}

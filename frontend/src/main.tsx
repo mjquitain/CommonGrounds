@@ -7,6 +7,7 @@ import { routeTree } from './routeTree.gen'
 
 import { MantineProvider } from '@mantine/core'
 import '@mantine/core/styles.css'
+import '@mantine/dates/styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 import './styles.css'
 

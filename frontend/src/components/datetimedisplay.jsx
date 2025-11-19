@@ -24,7 +24,7 @@ export default function DateTimeDisplay() {
 
   return (
     <Box w={"100%"} className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-md" >
-      <h1 className="font-bold text-6xl text-violet-500 pb-5">
+      <h1 className="font-bold text-6xl pb-5" style={{ color: '#575799' }}>
         {currentTime}
       </h1>
       <h2 className="text-xl text-gray-400">
