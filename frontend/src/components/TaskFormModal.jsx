@@ -21,7 +21,11 @@ export default function TaskFormModal({ opened, onClose, onSave, task = null }) 
                 title: task.title || "",
                 subject: task.subject || "",
                 description: typeof task.description === "string" ? task.description : "",
-                deadline: task.deadline ? new Date(task.deadline) : new Date(),
+                deadline: task.deadline
+                    ? dayjs(task.deadline).isValid()
+                        ? dayjs(task.deadline).toDate()
+                        : new Date()
+                    : new Date(),
                 status: task.status || "Not Started",
                 priority: task.priority || "Medium Priority",
                 progress: (task.progress || 0) * 100,

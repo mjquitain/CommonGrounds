@@ -1,3 +1,4 @@
+import { Group, Text, Title } from '@mantine/core'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { CalendarDays, Home, ListChecks, LogOut, Menu, Target, X } from 'lucide-react'
 import { useState } from 'react'
@@ -16,25 +17,34 @@ export default function Header() {
 
   return (
     <>
-      <header className="p-4 flex items-center bg-gradient-to-br from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] text-white shadow-lg">
+      <header className="p-2 flex items-center text-white shadow-lg" style={{ backgroundColor: '#575799' }}>
         <button
           onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+          className="p-4 hover:bg-violet-300 hover:text-black rounded-lg transition-colors"
           aria-label="Open menu"
         >
           <Menu size={20} />
         </button>
+        <Group ml={'8px'}>
+          <img src="group_main (1).png" className="h-8 w-8" />
+          <div>
+            <Title order={3} style={{ marginBottom: 0 }}>
+              CommonGrounds
+            </Title>
+            <Text size="sm" fs="italic">
+              Focus. Plan. Achieve.
+            </Text>
+          </div>
+        </Group>
       </header>
 
       <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-br from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 h-full w-80 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
+        style={{ backgroundColor: '#575799' }}
       >
         <div className="flex items-center justify-between p-4 border-b border-violet-300">
-          <div>
-            <h1 className="text-2xl font-bold">CommonGrounds</h1>
-            <h2 className="text-s italic"> Focus. Plan. Achieve.</h2>
-          </div>
+          <h1 className="text-2xl font-bold">Navigation</h1>
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-violet-300 hover:text-black rounded-lg transition-colors"

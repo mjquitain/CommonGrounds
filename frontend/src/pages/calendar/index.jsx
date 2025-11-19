@@ -97,7 +97,11 @@ export default function CalendarPage() {
       title: "",
       description: "",
       subject: "",
-      dueDate: null,
+      deadline: task.deadline
+        ? dayjs(task.deadline).isValid()
+          ? dayjs(task.deadline).toDate()
+          : new Date()
+        : new Date(),
       priority: "Medium Priority",
       status: "Not Started",
       instructor: "",
@@ -672,7 +676,7 @@ export default function CalendarPage() {
             label="Date & Time"
             placeholder="Select date and time"
             required
-            value={formData.dueDate}
+            value={formData.deadline}
             onChange={(value) => setFormData({ ...formData, dueDate: value })}
             disabled={isLoading}
             minDate={new Date()}
